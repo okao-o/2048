@@ -61,10 +61,19 @@ function updateBoard() {
 function startGame() {
   initBoard();
   score = 0;
+
+  // ★ すべてのセル表示を完全リセット
+  const cells = document.querySelectorAll(".cell");
+  cells.forEach(cell => {
+    cell.textContent = "";
+    cell.className = "cell";
+  });
+
   addRandomTile();
   updateBoard();
   updateScore();
 }
+
 
 
 startGame();
