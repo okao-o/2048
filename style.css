@@ -20,17 +20,17 @@ body {
 }
 
 .cell {
-  background-color: #cdc1b4;
   border-radius: 5px;
 
-  /* ▼ ここから追加 */
   display: flex;
   justify-content: center;
   align-items: center;
+
   font-size: 32px;
   font-weight: bold;
   color: #333;
 }
+
 .cell.tile-2    { background-color: #eee4da; color: #776e65; }
 .cell.tile-4    { background-color: #ede0c8; color: #776e65; }
 .cell.tile-8    { background-color: #f2b179; color: #f9f6f2; }
