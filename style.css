@@ -1,6 +1,5 @@
-/* 空マス */
 .cell {
-  background-color: #d6cec3;
+  background-color: #e8e6f0;
   border-radius: 8px;
 
   display: flex;
@@ -9,22 +8,21 @@
 
   font-size: 32px;
   font-weight: bold;
-  color: #5c5346;
+  color: #5a5a7a;
   line-height: 1;
 }
 
-/* タイル（くすみ系） */
-.cell.tile-2    { background-color: #eee6db; }
-.cell.tile-4    { background-color: #e6dccf; }
-.cell.tile-8    { background-color: #d6bfa8; color: #ffffff; }
-.cell.tile-16   { background-color: #c8a98d; color: #ffffff; }
-.cell.tile-32   { background-color: #b8906f; color: #ffffff; }
-.cell.tile-64   { background-color: #a8765a; color: #ffffff; }
+/* パステル系 */
+.cell.tile-2    { background-color: #f5e9ff; }
+.cell.tile-4    { background-color: #e7ddff; }
+.cell.tile-8    { background-color: #d2c4ff; color: #ffffff; }
+.cell.tile-16   { background-color: #bfb1ff; color: #ffffff; }
+.cell.tile-32   { background-color: #a9a0f5; color: #ffffff; }
+.cell.tile-64   { background-color: #8f8be8; color: #ffffff; }
 
-.cell.tile-128  { background-color: #c7b07b; color: #ffffff; font-size: 24px; }
-.cell.tile-256  { background-color: #bfa66b; color: #ffffff; font-size: 24px; }
-.cell.tile-512  { background-color: #b79c5a; color: #ffffff; font-size: 24px; }
+.cell.tile-128  { background-color: #f7d6e0; color: #ffffff; font-size: 24px; }
+.cell.tile-256  { background-color: #f2b6c8; color: #ffffff; font-size: 24px; }
+.cell.tile-512  { background-color: #ec9fb3; color: #ffffff; font-size: 24px; }
 
-.cell.tile-1024 { background-color: #a8904a; color: #ffffff; font-size: 20px; }
-.cell.tile-2048 { background-color: #9c843d; color: #ffffff; font-size: 20px; }
-
+.cell.tile-1024 { background-color: #f2c2a5; color: #ffffff; font-size: 20px; }
+.cell.tile-2048 { background-color: #e9a97c; color: #ffffff; font-size: 20px; }
