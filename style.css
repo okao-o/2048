@@ -3,7 +3,7 @@ body {
   text-align: center;
   background-color: #faf8ef;
 }
-body {
+#game-board {
   touch-action: none;
 }
 
