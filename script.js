@@ -224,3 +224,31 @@ function updateScore() {
   scoreElement.textContent = "Score: " + score;
 }
 
+let touchStartX = 0;
+let touchStartY = 0;
+
+document.addEventListener("touchstart", function (event) {
+  const touch = event.touches[0];
+  touchStartX = touch.clientX;
+  touchStartY = touch.clientY;
+}, { passive: false });
+
+document.addEventListener("touchend", function (event) {
+  const touch = event.changedTouches[0];
+  const dx = touch.clientX - touchStartX;
+  const dy = touch.clientY - touchStartY;
+
+  if (Math.abs(dx) > Math.abs(dy)) {
+    if (dx > 30) {
+      handleKeyDown({ key: "ArrowRight", preventDefault: () => {} });
+    } else if (dx < -30) {
+      handleKeyDown({ key: "ArrowLeft", preventDefault: () => {} });
+    }
+  } else {
+    if (dy > 30) {
+      handleKeyDown({ key: "ArrowDown", preventDefault: () => {} });
+    } else if (dy < -30) {
+      handleKeyDown({ key: "ArrowUp", preventDefault: () => {} });
+    }
+  }
+}, { passive: false });
