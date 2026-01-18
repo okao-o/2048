@@ -13,22 +13,34 @@ function initBoard() {
 }
 
 function startGame() {
+  // 盤面初期化
   initBoard();
+
+  // スコアと状態リセット
   score = 0;
   gameOver = false;
   gameCleared = false;
 
+  // セル表示を完全リセット
   const cells = document.querySelectorAll(".cell");
   cells.forEach(cell => {
     cell.textContent = "";
     cell.className = "cell";
   });
 
+  // 初期タイルは2枚追加する
   addRandomTile();
   addRandomTile();
+
+  // ボード更新
   updateBoard();
   updateScore();
+
+  // クリアオーバーレイ非表示
+  const overlay = document.getElementById("clear-overlay");
+  if (overlay) overlay.classList.add("hidden");
 }
+
 
 startGame();
 
