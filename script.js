@@ -230,8 +230,8 @@ function isGameOver() {
 }
 
 function updateScore() {
-  const scoreElement = document.getElementById("score");
-  scoreElement.textContent = "Score: " + score;
+  document.getElementById("score").textContent = "Score: " + score;
+  updateHighScore();
 }
 
 let touchStartX = 0;
@@ -274,3 +274,13 @@ function has2048() {
   return false;
 }
 
+function updateHighScore() {
+  const highScore = localStorage.getItem("highScore") || 0;
+
+  if (score > highScore) {
+    localStorage.setItem("highScore", score);
+  }
+
+  document.getElementById("high-score").textContent =
+    "High Score: " + localStorage.getItem("highScore");
+}
