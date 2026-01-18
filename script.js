@@ -43,9 +43,12 @@ function updateBoard() {
 }
 function startGame() {
   initBoard();
+  score = 0;
   addRandomTile();
   updateBoard();
+  updateScore();
 }
+
 
 startGame();
 
