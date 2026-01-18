@@ -3,6 +3,9 @@ body {
   text-align: center;
   background-color: #faf8ef;
 }
+body {
+  touch-action: none;
+}
 
 #game-board {
   width: 320px;
