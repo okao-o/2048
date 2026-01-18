@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const after=JSON.stringify(board);
     if(before!==after){ addRandomTile(); updateBoard(); updateScore(); 
       if(has2048() && !gameCleared){ showClearOverlay(); gameCleared=true; }
-      if(isGameOver()){ gameOver=true; alert("ゲームオーバー"); }
+      if(isGameOver()){ gameOver=true; alert("詰み😭"); }
     }
   });
 
