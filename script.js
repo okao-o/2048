@@ -1,7 +1,6 @@
 let score = 0;
 const boardSize = 4;
 let board = [];
-let gameOver = false;
 let cleared = false;
 
 /* ---------- 初期化 ---------- */
@@ -108,9 +107,7 @@ function handleKeyDown(event) {
 }
 
 
-    if (isGameOver()) {
-      gameOver = true;
-      alert("ゲームオーバー");
+   
     }
   }
 }
