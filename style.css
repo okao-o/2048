@@ -112,3 +112,8 @@ body {
   background-color: #d6cec3;
   color: #5c5346;
 }
+
+#clear-overlay.hidden {
+  display: none;
+  pointer-events: none;
+}
