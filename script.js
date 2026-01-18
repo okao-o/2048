@@ -76,15 +76,18 @@ function handleKeyDown(event) {
   const afterBoard = JSON.stringify(board);
 
   // 盤面が変わったときだけ新しいタイルを出す
- if (beforeBoard !== afterBoard) {
-  addRandomTile();
-  updateBoard();
-  updateScore();
+  if (beforeBoard !== afterBoard) {
+    addRandomTile();
+    updateBoard();
+    updateScore();
+  }
+
+  // ★ ゲームオーバー判定
+  if (isGameOver()) {
+    alert("ゲームオーバー");
+  }
 }
 
-if (isGameOver()) {
-  alert("ゲームオーバー");
-}
 
 
 
