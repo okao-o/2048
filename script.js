@@ -1,3 +1,4 @@
+let score = 0;
 const boardSize = 4;
 let board = [];
 function initBoard() {
@@ -104,22 +105,20 @@ function moveLeft() {
 }
 
 function mergeRowLeft(row) {
-  // ① まず左に詰める
   row = slideRowLeft(row);
 
-  // ② 合体処理
   for (let i = 0; i < boardSize - 1; i++) {
     if (row[i] !== 0 && row[i] === row[i + 1]) {
       row[i] *= 2;
+      score += row[i];   // ★ スコア加算
       row[i + 1] = 0;
     }
   }
 
-  // ③ もう一度左に詰める
   row = slideRowLeft(row);
-
   return row;
 }
+
 function boardsAreEqual(board1, board2) {
   return JSON.stringify(board1) === JSON.stringify(board2);
 }
