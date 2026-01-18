@@ -1,38 +1,28 @@
 let score = 0;
 const boardSize = 4;
 let board = [];
-let cleared = false;
+let gameOver = false;
+let gameCleared = false;
 
 /* ---------- 初期化 ---------- */
-
 function initBoard() {
-  board = [];
-  for (let i = 0; i < boardSize; i++) {
-    board.push(Array(boardSize).fill(0));
-  }
+  board = Array.from({ length: boardSize }, () => Array(boardSize).fill(0));
 }
 
 function startGame() {
-  // 盤面初期化
   initBoard();
-
-  // スコアと状態リセット
   score = 0;
   gameOver = false;
   gameCleared = false;
 
-  // セル表示を完全リセット
   const cells = document.querySelectorAll(".cell");
   cells.forEach(cell => {
     cell.textContent = "";
     cell.className = "cell";
   });
 
-  // 初期タイルは2枚追加する
   addRandomTile();
   addRandomTile();
-
-  // ボード更新
   updateBoard();
   updateScore();
 
@@ -41,22 +31,14 @@ function startGame() {
   if (overlay) overlay.classList.add("hidden");
 }
 
-
-startGame();
-
 /* ---------- タイル生成 ---------- */
-
 function addRandomTile() {
   const emptyCells = [];
-
   for (let i = 0; i < boardSize; i++) {
     for (let j = 0; j < boardSize; j++) {
-      if (board[i][j] === 0) {
-        emptyCells.push({ x: i, y: j });
-      }
+      if (board[i][j] === 0) emptyCells.push({ x: i, y: j });
     }
   }
-
   if (emptyCells.length === 0) return;
 
   const { x, y } = emptyCells[Math.floor(Math.random() * emptyCells.length)];
@@ -64,7 +46,6 @@ function addRandomTile() {
 }
 
 /* ---------- 描画 ---------- */
-
 function updateBoard() {
   const cells = document.querySelectorAll(".cell");
   let index = 0;
@@ -88,44 +69,7 @@ function updateBoard() {
   }
 }
 
-/* ---------- 操作 ---------- */
-
-window.addEventListener("keydown", handleKeyDown);
-
-function handleKeyDown(event) {
-  if (gameOver) return;
-
-  if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) {
-    event.preventDefault();
-  }
-
-  const before = JSON.stringify(board);
-
-  if (event.key === "ArrowLeft") moveLeft();
-  if (event.key === "ArrowRight") moveRight();
-  if (event.key === "ArrowUp") moveUp();
-  if (event.key === "ArrowDown") moveDown();
-
-  const after = JSON.stringify(board);
-
-  if (before !== after) {
-    addRandomTile();
-    updateBoard();
-    updateScore();
-
-   if (has2048() && !gameCleared) {
-  showClearOverlay();
-  gameCleared = true;
-}
-
-
-   
-    }
-  }
-}
-
 /* ---------- 移動ロジック ---------- */
-
 function slide(row) {
   const newRow = row.filter(v => v !== 0);
   while (newRow.length < boardSize) newRow.push(0);
@@ -145,9 +89,7 @@ function merge(row) {
 }
 
 function moveLeft() {
-  for (let i = 0; i < boardSize; i++) {
-    board[i] = merge(board[i]);
-  }
+  for (let i = 0; i < boardSize; i++) board[i] = merge(board[i]);
 }
 
 function moveRight() {
@@ -159,23 +101,18 @@ function moveRight() {
 function moveUp() {
   for (let col = 0; col < boardSize; col++) {
     const column = merge(board.map(r => r[col]));
-    for (let row = 0; row < boardSize; row++) {
-      board[row][col] = column[row];
-    }
+    for (let row = 0; row < boardSize; row++) board[row][col] = column[row];
   }
 }
 
 function moveDown() {
   for (let col = 0; col < boardSize; col++) {
     const column = merge(board.map(r => r[col]).reverse()).reverse();
-    for (let row = 0; row < boardSize; row++) {
-      board[row][col] = column[row];
-    }
+    for (let row = 0; row < boardSize; row++) board[row][col] = column[row];
   }
 }
 
 /* ---------- 判定 ---------- */
-
 function has2048() {
   return board.some(row => row.includes(2048));
 }
@@ -188,12 +125,7 @@ function canMerge() {
   for (let i = 0; i < boardSize; i++) {
     for (let j = 0; j < boardSize; j++) {
       const v = board[i][j];
-      if (
-        (i < boardSize - 1 && v === board[i + 1][j]) ||
-        (j < boardSize - 1 && v === board[i][j + 1])
-      ) {
-        return true;
-      }
+      if ((i < boardSize - 1 && v === board[i + 1][j]) || (j < boardSize - 1 && v === board[i][j + 1])) return true;
     }
   }
   return false;
@@ -204,22 +136,48 @@ function isGameOver() {
 }
 
 /* ---------- スコア ---------- */
-
 function updateScore() {
   document.getElementById("score").textContent = "Score: " + score;
-
-  const highScore = Math.max(
-    score,
-    Number(localStorage.getItem("highScore") || 0)
-  );
-
+  const highScore = Math.max(score, Number(localStorage.getItem("highScore") || 0));
   localStorage.setItem("highScore", highScore);
-  document.getElementById("high-score").textContent =
-    "High Score: " + highScore;
+  document.getElementById("high-score").textContent = "High Score: " + highScore;
 }
 
-/* ---------- タッチ操作（ボード限定） ---------- */
+/* ---------- キーボード ---------- */
+window.addEventListener("keydown", handleKeyDown);
 
+function handleKeyDown(event) {
+  if (gameOver) return;
+
+  if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) event.preventDefault();
+
+  const before = JSON.stringify(board);
+
+  if (event.key === "ArrowLeft") moveLeft();
+  if (event.key === "ArrowRight") moveRight();
+  if (event.key === "ArrowUp") moveUp();
+  if (event.key === "ArrowDown") moveDown();
+
+  const after = JSON.stringify(board);
+
+  if (before !== after) {
+    addRandomTile();
+    updateBoard();
+    updateScore();
+
+    if (has2048() && !gameCleared) {
+      showClearOverlay();
+      gameCleared = true;
+    }
+
+    if (isGameOver()) {
+      alert("ゲームオーバー");
+      gameOver = true;
+    }
+  }
+}
+
+/* ---------- タッチ ---------- */
 const gameBoard = document.getElementById("game-board");
 let touchStartX = 0;
 let touchStartY = 0;
@@ -230,9 +188,7 @@ gameBoard.addEventListener("touchstart", e => {
   touchStartY = t.clientY;
 }, { passive: false });
 
-gameBoard.addEventListener("touchmove", e => {
-  e.preventDefault();
-}, { passive: false });
+gameBoard.addEventListener("touchmove", e => e.preventDefault(), { passive: false });
 
 gameBoard.addEventListener("touchend", e => {
   const t = e.changedTouches[0];
@@ -240,17 +196,15 @@ gameBoard.addEventListener("touchend", e => {
   const dy = t.clientY - touchStartY;
 
   if (Math.abs(dx) > Math.abs(dy)) {
-    if (dx > 30) handleKeyDown({ key: "ArrowRight", preventDefault() {} });
-    if (dx < -30) handleKeyDown({ key: "ArrowLeft", preventDefault() {} });
+    if (dx > 30) handleKeyDown({ key: "ArrowRight", preventDefault: () => {} });
+    if (dx < -30) handleKeyDown({ key: "ArrowLeft", preventDefault: () => {} });
   } else {
-    if (dy > 30) handleKeyDown({ key: "ArrowDown", preventDefault() {} });
-    if (dy < -30) handleKeyDown({ key: "ArrowUp", preventDefault() {} });
+    if (dy > 30) handleKeyDown({ key: "ArrowDown", preventDefault: () => {} });
+    if (dy < -30) handleKeyDown({ key: "ArrowUp", preventDefault: () => {} });
   }
-}, { passive: false });
+});
 
-
-let gameCleared = false;
-
+/* ---------- クリア演出 ---------- */
 function showClearOverlay() {
   document.getElementById("clear-overlay").classList.remove("hidden");
 }
@@ -259,8 +213,7 @@ document.getElementById("continue-btn").addEventListener("click", () => {
   document.getElementById("clear-overlay").classList.add("hidden");
 });
 
-document.getElementById("restart-btn").addEventListener("click", () => {
-  document.getElementById("clear-overlay").classList.add("hidden");
-  startGame();
-});
+document.getElementById("restart-btn").addEventListener("click", startGame);
+document.getElementById("restart").addEventListener("click", startGame);
+
 
