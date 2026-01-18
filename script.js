@@ -1,219 +1,147 @@
-let score = 0;
-const boardSize = 4;
-let board = [];
-let gameOver = false;
-let gameCleared = false;
+document.addEventListener("DOMContentLoaded", () => {
 
-/* ---------- 初期化 ---------- */
-function initBoard() {
-  board = Array.from({ length: boardSize }, () => Array(boardSize).fill(0));
-}
+  const boardSize = 4;
+  let board = [];
+  let score = 0;
+  let gameOver = false;
+  let gameCleared = false;
 
-function startGame() {
-  initBoard();
-  score = 0;
-  gameOver = false;
-  gameCleared = false;
+  const gameBoard = document.getElementById("game-board");
 
-  const cells = document.querySelectorAll(".cell");
-  cells.forEach(cell => {
-    cell.textContent = "";
-    cell.className = "cell";
-  });
-
-  addRandomTile();
-  addRandomTile();
-  updateBoard();
-  updateScore();
-
-  // クリアオーバーレイ非表示
-  const overlay = document.getElementById("clear-overlay");
-  if (overlay) overlay.classList.add("hidden");
-}
-
-/* ---------- タイル生成 ---------- */
-function addRandomTile() {
-  const emptyCells = [];
-  for (let i = 0; i < boardSize; i++) {
-    for (let j = 0; j < boardSize; j++) {
-      if (board[i][j] === 0) emptyCells.push({ x: i, y: j });
-    }
+  // 16セルを自動生成
+  for (let i = 0; i < boardSize * boardSize; i++) {
+    const div = document.createElement("div");
+    div.className = "cell";
+    gameBoard.appendChild(div);
   }
-  if (emptyCells.length === 0) return;
 
-  const { x, y } = emptyCells[Math.floor(Math.random() * emptyCells.length)];
-  board[x][y] = Math.random() < 0.9 ? 2 : 4;
-}
-
-/* ---------- 描画 ---------- */
-function updateBoard() {
   const cells = document.querySelectorAll(".cell");
-  let index = 0;
 
-  for (let i = 0; i < boardSize; i++) {
-    for (let j = 0; j < boardSize; j++) {
-      const cell = cells[index];
-      const value = board[i][j];
+  // ---------- 初期化 ----------
+  function initBoard() {
+    board = Array.from({ length: boardSize }, () => Array(boardSize).fill(0));
+  }
 
-      cell.className = "cell";
+  function addRandomTile() {
+    const empty = [];
+    board.forEach((row, i) =>
+      row.forEach((v,j) => { if (v === 0) empty.push({i,j}); })
+    );
+    if (!empty.length) return;
+    const {i,j} = empty[Math.floor(Math.random()*empty.length)];
+    board[i][j] = Math.random() < 0.9 ? 2 : 4;
+  }
 
-      if (value !== 0) {
-        cell.textContent = value;
-        cell.classList.add(`tile-${value}`);
-      } else {
-        cell.textContent = "";
+  function updateBoard() {
+    let index = 0;
+    for (let i=0;i<boardSize;i++){
+      for (let j=0;j<boardSize;j++){
+        const cell = cells[index];
+        const value = board[i][j];
+        cell.className = "cell";
+        if (value !== 0){
+          cell.textContent = value;
+          cell.classList.add(`tile-${value}`);
+        } else cell.textContent = "";
+        index++;
       }
-
-      index++;
     }
   }
-}
 
-/* ---------- 移動ロジック ---------- */
-function slide(row) {
-  const newRow = row.filter(v => v !== 0);
-  while (newRow.length < boardSize) newRow.push(0);
-  return newRow;
-}
-
-function merge(row) {
-  row = slide(row);
-  for (let i = 0; i < boardSize - 1; i++) {
-    if (row[i] !== 0 && row[i] === row[i + 1]) {
-      row[i] *= 2;
-      score += row[i];
-      row[i + 1] = 0;
-    }
+  function updateScore() {
+    document.getElementById("score").textContent = "Score: " + score;
+    const hs = Math.max(score, Number(localStorage.getItem("highScore")||0));
+    localStorage.setItem("highScore", hs);
+    document.getElementById("high-score").textContent = "High Score: " + hs;
   }
-  return slide(row);
-}
 
-function moveLeft() {
-  for (let i = 0; i < boardSize; i++) board[i] = merge(board[i]);
-}
-
-function moveRight() {
-  for (let i = 0; i < boardSize; i++) {
-    board[i] = merge(board[i].slice().reverse()).reverse();
-  }
-}
-
-function moveUp() {
-  for (let col = 0; col < boardSize; col++) {
-    const column = merge(board.map(r => r[col]));
-    for (let row = 0; row < boardSize; row++) board[row][col] = column[row];
-  }
-}
-
-function moveDown() {
-  for (let col = 0; col < boardSize; col++) {
-    const column = merge(board.map(r => r[col]).reverse()).reverse();
-    for (let row = 0; row < boardSize; row++) board[row][col] = column[row];
-  }
-}
-
-/* ---------- 判定 ---------- */
-function has2048() {
-  return board.some(row => row.includes(2048));
-}
-
-function hasEmptyCell() {
-  return board.some(row => row.includes(0));
-}
-
-function canMerge() {
-  for (let i = 0; i < boardSize; i++) {
-    for (let j = 0; j < boardSize; j++) {
-      const v = board[i][j];
-      if ((i < boardSize - 1 && v === board[i + 1][j]) || (j < boardSize - 1 && v === board[i][j + 1])) return true;
-    }
-  }
-  return false;
-}
-
-function isGameOver() {
-  return !hasEmptyCell() && !canMerge();
-}
-
-/* ---------- スコア ---------- */
-function updateScore() {
-  document.getElementById("score").textContent = "Score: " + score;
-  const highScore = Math.max(score, Number(localStorage.getItem("highScore") || 0));
-  localStorage.setItem("highScore", highScore);
-  document.getElementById("high-score").textContent = "High Score: " + highScore;
-}
-
-/* ---------- キーボード ---------- */
-window.addEventListener("keydown", handleKeyDown);
-
-function handleKeyDown(event) {
-  if (gameOver) return;
-
-  if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) event.preventDefault();
-
-  const before = JSON.stringify(board);
-
-  if (event.key === "ArrowLeft") moveLeft();
-  if (event.key === "ArrowRight") moveRight();
-  if (event.key === "ArrowUp") moveUp();
-  if (event.key === "ArrowDown") moveDown();
-
-  const after = JSON.stringify(board);
-
-  if (before !== after) {
+  // ---------- ゲーム開始 ----------
+  function startGame() {
+    initBoard();
+    score = 0; gameOver = false; gameCleared = false;
+    cells.forEach(c => { c.textContent=""; c.className="cell"; });
+    addRandomTile();
     addRandomTile();
     updateBoard();
     updateScore();
+    document.getElementById("clear-overlay").classList.add("hidden");
+  }
 
-    if (has2048() && !gameCleared) {
-      showClearOverlay();
-      gameCleared = true;
+  startGame();
+
+  document.getElementById("restart").addEventListener("click", startGame);
+  document.getElementById("restart-btn").addEventListener("click", startGame);
+  document.getElementById("continue-btn").addEventListener("click", () => {
+    document.getElementById("clear-overlay").classList.add("hidden");
+  });
+
+  // ---------- 移動 ----------
+  function slide(row) { const r=row.filter(v=>v); while(r.length<boardSize) r.push(0); return r; }
+  function merge(row){
+    row=slide(row);
+    for(let i=0;i<boardSize-1;i++){
+      if(row[i]!==0 && row[i]===row[i+1]){
+        row[i]*=2; score+=row[i]; row[i+1]=0;
+      }
     }
+    return slide(row);
+  }
 
-    if (isGameOver()) {
-      alert("ゲームオーバー");
-      gameOver = true;
+  function moveLeft(){ for(let i=0;i<boardSize;i++) board[i]=merge(board[i]); }
+  function moveRight(){ for(let i=0;i<boardSize;i++) board[i]=merge(board[i].slice().reverse()).reverse(); }
+  function moveUp(){
+    for(let c=0;c<boardSize;c++){
+      const col=merge(board.map(r=>r[c]));
+      for(let r=0;r<boardSize;r++) board[r][c]=col[r];
     }
   }
-}
-
-/* ---------- タッチ ---------- */
-const gameBoard = document.getElementById("game-board");
-let touchStartX = 0;
-let touchStartY = 0;
-
-gameBoard.addEventListener("touchstart", e => {
-  const t = e.touches[0];
-  touchStartX = t.clientX;
-  touchStartY = t.clientY;
-}, { passive: false });
-
-gameBoard.addEventListener("touchmove", e => e.preventDefault(), { passive: false });
-
-gameBoard.addEventListener("touchend", e => {
-  const t = e.changedTouches[0];
-  const dx = t.clientX - touchStartX;
-  const dy = t.clientY - touchStartY;
-
-  if (Math.abs(dx) > Math.abs(dy)) {
-    if (dx > 30) handleKeyDown({ key: "ArrowRight", preventDefault: () => {} });
-    if (dx < -30) handleKeyDown({ key: "ArrowLeft", preventDefault: () => {} });
-  } else {
-    if (dy > 30) handleKeyDown({ key: "ArrowDown", preventDefault: () => {} });
-    if (dy < -30) handleKeyDown({ key: "ArrowUp", preventDefault: () => {} });
+  function moveDown(){
+    for(let c=0;c<boardSize;c++){
+      const col=merge(board.map(r=>r[c]).reverse()).reverse();
+      for(let r=0;r<boardSize;r++) board[r][c]=col[r];
+    }
   }
+
+  function has2048(){ return board.some(r=>r.includes(2048)); }
+  function hasEmpty(){ return board.some(r=>r.includes(0)); }
+  function canMerge(){ return board.some((row,i)=>row.some((v,j)=> (v && ((i<boardSize-1 && v===board[i+1][j]) || (j<boardSize-1 && v===board[i][j+1]))))); }
+  function isGameOver(){ return !hasEmpty() && !canMerge(); }
+
+  function showClearOverlay(){ document.getElementById("clear-overlay").classList.remove("hidden"); }
+
+  // ---------- キー操作 ----------
+  window.addEventListener("keydown", e => {
+    if(gameOver) return;
+    if(["ArrowLeft","ArrowRight","ArrowUp","ArrowDown"].includes(e.key)) e.preventDefault();
+    const before = JSON.stringify(board);
+    if(e.key==="ArrowLeft") moveLeft();
+    if(e.key==="ArrowRight") moveRight();
+    if(e.key==="ArrowUp") moveUp();
+    if(e.key==="ArrowDown") moveDown();
+    const after=JSON.stringify(board);
+    if(before!==after){ addRandomTile(); updateBoard(); updateScore(); 
+      if(has2048() && !gameCleared){ showClearOverlay(); gameCleared=true; }
+      if(isGameOver()){ gameOver=true; alert("ゲームオーバー"); }
+    }
+  });
+
+  // ---------- タッチ操作 ----------
+  let tStartX=0, tStartY=0;
+  gameBoard.addEventListener("touchstart", e=>{
+    tStartX=e.touches[0].clientX;
+    tStartY=e.touches[0].clientY;
+  }, {passive:false});
+  gameBoard.addEventListener("touchmove", e=>e.preventDefault(), {passive:false});
+  gameBoard.addEventListener("touchend", e=>{
+    const dx=e.changedTouches[0].clientX-tStartX;
+    const dy=e.changedTouches[0].clientY-tStartY;
+    if(Math.abs(dx)>Math.abs(dy)){
+      if(dx>30) window.dispatchEvent(new KeyboardEvent("keydown",{key:"ArrowRight"}));
+      if(dx<-30) window.dispatchEvent(new KeyboardEvent("keydown",{key:"ArrowLeft"}));
+    } else {
+      if(dy>30) window.dispatchEvent(new KeyboardEvent("keydown",{key:"ArrowDown"}));
+      if(dy<-30) window.dispatchEvent(new KeyboardEvent("keydown",{key:"ArrowUp"}));
+    }
+  }, {passive:false});
+
 });
-
-/* ---------- クリア演出 ---------- */
-function showClearOverlay() {
-  document.getElementById("clear-overlay").classList.remove("hidden");
-}
-
-document.getElementById("continue-btn").addEventListener("click", () => {
-  document.getElementById("clear-overlay").classList.add("hidden");
-});
-
-document.getElementById("restart-btn").addEventListener("click", startGame);
-document.getElementById("restart").addEventListener("click", startGame);
-
-
