@@ -43,7 +43,13 @@ function updateBoard() {
 function startGame() {
   initBoard();
   addRandomTile();
-  document.addEventListener("keydown", handleKeyDown);
+  updateBoard();
+}
+
+startGame();
+
+
+document.addEventListener("keydown", handleKeyDown);
 
 function handleKeyDown(event) {
   if (event.key === "ArrowLeft") {
@@ -52,8 +58,6 @@ function handleKeyDown(event) {
   }
 }
 
-  updateBoard();
-}
 function slideRowLeft(row) {
   let newRow = row.filter(value => value !== 0);
 
@@ -64,7 +68,6 @@ function slideRowLeft(row) {
   return newRow;
 }
 
-startGame();
 function moveLeft() {
   for (let i = 0; i < boardSize; i++) {
     board[i] = slideRowLeft(board[i]);
