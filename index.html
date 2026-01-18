@@ -3,42 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <title>2048 Game</title>
-  <link rel="stylesheet" href="style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <link rel="stylesheet" href="style.css">
 </head>
-<body tabindex="0">
-
+<body>
 
   <h1>2048 Game</h1>
 
   <div id="score">Score: 0</div>
+  <div id="high-score">High Score: 0</div>
 
-  <button onclick="startGame()">リスタート</button>
+  <button id="restart">リスタート</button>
 
   <div id="game-board">
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
+    <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+    <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+    <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+    <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
   </div>
-
-  <div id="high-score">High Score: 0</div>
 
   <script src="script.js"></script>
 </body>
