@@ -93,9 +93,3 @@ body {
 #restart-btn  { background-color: #d6cec3; color: #5c5346; }
 
 
-.subtitle {
-  font-size: 0.8rem;  /* 小さめの文字 */
-  color: #666;        /* 少し薄めの色 */
-  margin: 0;
-  margin-bottom: 4px; /* タイトルとの間隔 */
-}
