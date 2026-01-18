@@ -52,6 +52,10 @@ startGame();
 document.addEventListener("keydown", handleKeyDown);
 
 function handleKeyDown(event) {
+  if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) {
+    event.preventDefault(); // ← これが重要
+  }
+
   let beforeBoard = JSON.stringify(board);
 
   if (event.key === "ArrowLeft") {
@@ -71,6 +75,7 @@ function handleKeyDown(event) {
     updateBoard();
   }
 }
+
 
 
 
