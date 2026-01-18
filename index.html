@@ -16,21 +16,19 @@
   <button id="restart">リスタート</button>
 
   <div id="game-board">
-    <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
-    <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
-    <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
-    <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+    <!-- 16セル自動生成 -->
+  </div>
+
+  <!-- クリアオーバーレイ -->
+  <div id="clear-overlay" class="hidden">
+    <div class="clear-box">
+      <h2>🎉 CLEAR!</h2>
+      <p>2048 を達成しました</p>
+      <button id="continue-btn">続ける</button>
+      <button id="restart-btn">リスタート</button>
+    </div>
   </div>
 
   <script src="script.js"></script>
-  <div id="clear-overlay" class="hidden">
-  <div class="clear-box">
-    <h2>🎉 CLEAR!</h2>
-    <p>2048 を達成しました</p>
-    <button id="continue-btn">続ける</button>
-    <button id="restart-btn">リスタート</button>
-  </div>
-</div>
-
 </body>
 </html>
