@@ -38,7 +38,12 @@ function updateBoard() {
       const value = board[i][j];
       const cell = cells[index];
 
-      cell.className = "cell"; // クラスをリセット
+      // tile-* クラスだけ削除
+      cell.classList.forEach(cls => {
+        if (cls.startsWith("tile-")) {
+          cell.classList.remove(cls);
+        }
+      });
 
       if (value !== 0) {
         cell.textContent = value;
@@ -51,6 +56,7 @@ function updateBoard() {
     }
   }
 }
+
 
 function startGame() {
   initBoard();
