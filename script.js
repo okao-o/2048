@@ -98,6 +98,10 @@ function handleKeyDown(event) {
     updateBoard();
     updateScore();
   }
+  
+if (has2048()) {
+  alert("2048 達成！クリア！");
+}
 
   // ★ ゲームオーバー判定
   if (isGameOver()) {
@@ -258,3 +262,15 @@ document.addEventListener("touchend", function (event) {
     }
   }
 }, { passive: false });
+
+function has2048() {
+  for (let i = 0; i < boardSize; i++) {
+    for (let j = 0; j < boardSize; j++) {
+      if (board[i][j] === 2048) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
