@@ -154,3 +154,6 @@ function moveDown() {
     setColumn(col, column);
   }
 }
+window.onload = () => {
+  document.body.focus();
+};
