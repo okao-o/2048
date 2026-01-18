@@ -103,6 +103,6 @@ body {
   font-size: 0.8rem;  /* 小さめの文字 */
   color: #666;        /* 少し薄めの色 */
   margin: 0;
-  margin-bottom: 0.2px; /* タイトルとの間隔 */
+  margin-bottom: 0px; /* 下との間隔 */
 }
 
