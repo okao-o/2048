@@ -85,6 +85,7 @@ window.addEventListener("keydown", handleKeyDown);
 
 
 function handleKeyDown(event) {
+  if (gameOver) return;
   if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) {
     event.preventDefault();
   }
