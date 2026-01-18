@@ -18,7 +18,7 @@
 
 
 .cell {
-  background-color: #e8e6f0;
+  background-color: #d6cec3; /* 空マス */
   border-radius: 8px;
 
   display: flex;
@@ -27,9 +27,11 @@
 
   font-size: 32px;
   font-weight: bold;
-  color: #5a5a7a;
+  color: #5c5346;
+
   line-height: 1;
 }
+
 
 /* パステル系 */
 .cell.tile-2    { background-color: #f5e9ff; }
