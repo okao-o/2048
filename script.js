@@ -17,7 +17,7 @@ function startGame() {
   initBoard();
   score = 0;
   gameOver = false;
-  cleared = false;
+  gameCleared = false;
 
   const cells = document.querySelectorAll(".cell");
   cells.forEach(cell => {
@@ -102,10 +102,11 @@ function handleKeyDown(event) {
     updateBoard();
     updateScore();
 
-    if (has2048() && !cleared) {
-      cleared = true;
-      alert("2048 達成！クリア！");
-    }
+   if (has2048() && !gameCleared) {
+  showClearOverlay();
+  gameCleared = true;
+}
+
 
     if (isGameOver()) {
       gameOver = true;
@@ -237,4 +238,20 @@ gameBoard.addEventListener("touchend", e => {
     if (dy < -30) handleKeyDown({ key: "ArrowUp", preventDefault() {} });
   }
 }, { passive: false });
+
+
+let gameCleared = false;
+
+function showClearOverlay() {
+  document.getElementById("clear-overlay").classList.remove("hidden");
+}
+
+document.getElementById("continue-btn").addEventListener("click", () => {
+  document.getElementById("clear-overlay").classList.add("hidden");
+});
+
+document.getElementById("restart-btn").addEventListener("click", () => {
+  document.getElementById("clear-overlay").classList.add("hidden");
+  startGame();
+});
 
