@@ -54,10 +54,10 @@ window.addEventListener("keydown", handleKeyDown);
 
 function handleKeyDown(event) {
   if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) {
-    event.preventDefault(); // ← これが重要
+    event.preventDefault();
   }
 
-  let beforeBoard = JSON.stringify(board);
+  const beforeBoard = JSON.stringify(board);
 
   if (event.key === "ArrowLeft") {
     moveLeft();
@@ -69,11 +69,15 @@ function handleKeyDown(event) {
     moveDown();
   }
 
-  let afterBoard = JSON.stringify(board);
+  const afterBoard = JSON.stringify(board);
 
   if (beforeBoard !== afterBoard) {
     addRandomTile();
     updateBoard();
+
+    if (isGameOver()) {
+      alert("ゲームオーバー");
+    }
   }
 }
 
