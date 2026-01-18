@@ -181,16 +181,26 @@ function canMerge() {
     for (let j = 0; j < boardSize; j++) {
       const current = board[i][j];
 
-      if (j < boardSize - 1 && current === board[i][j + 1]) {
+      if (
+        j < boardSize - 1 &&
+        current !== 0 &&
+        current === board[i][j + 1]
+      ) {
         return true;
       }
-      if (i < boardSize - 1 && current === board[i + 1][j]) {
+
+      if (
+        i < boardSize - 1 &&
+        current !== 0 &&
+        current === board[i + 1][j]
+      ) {
         return true;
       }
     }
   }
   return false;
 }
+
 
 function isGameOver() {
   return !hasEmptyCell() && !canMerge();
