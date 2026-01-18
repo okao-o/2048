@@ -284,3 +284,11 @@ function updateHighScore() {
   document.getElementById("high-score").textContent =
     "High Score: " + localStorage.getItem("highScore");
 }
+
+document.addEventListener(
+  "touchmove",
+  function (event) {
+    event.preventDefault();
+  },
+  { passive: false }
+);
