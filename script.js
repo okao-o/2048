@@ -307,3 +307,7 @@ function updateHighScore() {
 
 let gameOver = false;
 
+if (isGameOver()) {
+  gameOver = true;
+  alert("ゲームオーバー");
+}
