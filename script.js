@@ -71,15 +71,18 @@ function handleKeyDown(event) {
 
   const afterBoard = JSON.stringify(board);
 
+  // 盤面が変わったときだけ新しいタイルを出す
   if (beforeBoard !== afterBoard) {
     addRandomTile();
     updateBoard();
+  }
 
-    if (isGameOver()) {
-      alert("ゲームオーバー");
-    }
+  // ★ 盤面が変わらなくても必ずゲームオーバー判定
+  if (isGameOver()) {
+    alert("ゲームオーバー");
   }
 }
+
 
 
 
@@ -193,11 +196,3 @@ function isGameOver() {
   return !hasEmptyCell() && !canMerge();
 }
 
-if (beforeBoard !== afterBoard) {
-  addRandomTile();
-  updateBoard();
-
-  if (isGameOver()) {
-    alert("ゲームオーバー");
-  }
-}
