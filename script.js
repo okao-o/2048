@@ -61,6 +61,8 @@ function updateBoard() {
 function startGame() {
   initBoard();
   score = 0;
+  gameOver = false;
+
 
   // ★ すべてのセル表示を完全リセット
   const cells = document.querySelectorAll(".cell");
@@ -301,4 +303,6 @@ function updateHighScore() {
   document.getElementById("high-score").textContent =
     "High Score: " + localStorage.getItem("highScore");
 }
+
+let gameOver = false;
 
