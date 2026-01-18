@@ -54,9 +54,11 @@ document.addEventListener("keydown", handleKeyDown);
 function handleKeyDown(event) {
   if (event.key === "ArrowLeft") {
     moveLeft();
+    addRandomTile();
     updateBoard();
   }
 }
+
 
 function slideRowLeft(row) {
   let newRow = row.filter(value => value !== 0);
@@ -70,6 +72,24 @@ function slideRowLeft(row) {
 
 function moveLeft() {
   for (let i = 0; i < boardSize; i++) {
-    board[i] = slideRowLeft(board[i]);
+    board[i] = mergeRowLeft(board[i]);
   }
+}
+
+function mergeRowLeft(row) {
+  // ① まず左に詰める
+  row = slideRowLeft(row);
+
+  // ② 合体処理
+  for (let i = 0; i < boardSize - 1; i++) {
+    if (row[i] !== 0 && row[i] === row[i + 1]) {
+      row[i] *= 2;
+      row[i + 1] = 0;
+    }
+  }
+
+  // ③ もう一度左に詰める
+  row = slideRowLeft(row);
+
+  return row;
 }
