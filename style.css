@@ -1,0 +1,22 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #faf8ef;
+}
+
+#game-board {
+  width: 320px;
+  height: 320px;
+  margin: 20px auto;
+  background-color: #bbada0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.cell {
+  background-color: #cdc1b4;
+  border-radius: 5px;
+}
