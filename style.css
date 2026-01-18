@@ -1,3 +1,8 @@
+body {
+  touch-action: none;
+  overscroll-behavior: none; /* ★ 追加 */
+}
+
 #game-board {
   width: 90vw;
   max-width: 360px;
