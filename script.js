@@ -157,3 +157,43 @@ function moveDown() {
 window.onload = () => {
   document.body.focus();
 };
+
+function hasEmptyCell() {
+  for (let i = 0; i < boardSize; i++) {
+    for (let j = 0; j < boardSize; j++) {
+      if (board[i][j] === 0) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+function canMerge() {
+  for (let i = 0; i < boardSize; i++) {
+    for (let j = 0; j < boardSize; j++) {
+      const current = board[i][j];
+
+      if (j < boardSize - 1 && current === board[i][j + 1]) {
+        return true;
+      }
+      if (i < boardSize - 1 && current === board[i + 1][j]) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+function isGameOver() {
+  return !hasEmptyCell() && !canMerge();
+}
+
+if (beforeBoard !== afterBoard) {
+  addRandomTile();
+  updateBoard();
+
+  if (isGameOver()) {
+    alert("ゲームオーバー");
+  }
+}
