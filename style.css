@@ -40,21 +40,16 @@ body {
 }
 
 
-/* 低い数字：寒色寄り */
-.cell.tile-2    { background-color: #e3f2fd; color: #1e3a5f; }
-.cell.tile-4    { background-color: #bbdefb; color: #1e3a5f; }
+.cell.tile-2    { background-color: #f5e9ff; }
+.cell.tile-4    { background-color: #e7ddff; }
+.cell.tile-8    { background-color: #d2c4ff; color: #ffffff; }
+.cell.tile-16   { background-color: #bfb1ff; color: #ffffff; }
+.cell.tile-32   { background-color: #a9a0f5; color: #ffffff; }
+.cell.tile-64   { background-color: #8f8be8; color: #ffffff; }
 
-/* 中間：グリーン〜ターコイズ */
-.cell.tile-8    { background-color: #c8e6c9; color: #1b5e20; }
-.cell.tile-16   { background-color: #a5d6a7; color: #1b5e20; }
-.cell.tile-32   { background-color: #b2ebf2; color: #004d40; }
-.cell.tile-64   { background-color: #80deea; color: #004d40; }
+.cell.tile-128  { background-color: #f7d6e0; color: #ffffff; font-size: 24px; }
+.cell.tile-256  { background-color: #f2b6c8; color: #ffffff; font-size: 24px; }
+.cell.tile-512  { background-color: #ec9fb3; color: #ffffff; font-size: 24px; }
 
-/* 高め：暖色 */
-.cell.tile-128  { background-color: #ffe0b2; color: #5d4037; font-size: 24px; }
-.cell.tile-256  { background-color: #ffcc80; color: #5d4037; font-size: 24px; }
-.cell.tile-512  { background-color: #ffab91; color: #4e342e; font-size: 24px; }
-
-/* 最上位 */
-.cell.tile-1024 { background-color: #f48fb1; color: #ffffff; font-size: 20px; }
-.cell.tile-2048 { background-color: #ce93d8; color: #ffffff; font-size: 20px; }
+.cell.tile-1024 { background-color: #f2c2a5; color: #ffffff; font-size: 20px; }
+.cell.tile-2048 { background-color: #e9a97c; color: #ffffff; font-size: 20px; }
