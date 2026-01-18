@@ -36,11 +36,22 @@ function updateBoard() {
   for (let i = 0; i < boardSize; i++) {
     for (let j = 0; j < boardSize; j++) {
       const value = board[i][j];
-      cells[index].textContent = value === 0 ? "" : value;
+      const cell = cells[index];
+
+      cell.className = "cell"; // クラスをリセット
+
+      if (value !== 0) {
+        cell.textContent = value;
+        cell.classList.add("tile-" + value);
+      } else {
+        cell.textContent = "";
+      }
+
       index++;
     }
   }
 }
+
 function startGame() {
   initBoard();
   score = 0;
