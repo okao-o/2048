@@ -52,20 +52,26 @@ startGame();
 document.addEventListener("keydown", handleKeyDown);
 
 function handleKeyDown(event) {
+  let beforeBoard = JSON.stringify(board);
+
   if (event.key === "ArrowLeft") {
-    const beforeBoard = JSON.stringify(board);
-
     moveLeft();
+  } else if (event.key === "ArrowRight") {
+    moveRight();
+  } else if (event.key === "ArrowUp") {
+    moveUp();
+  } else if (event.key === "ArrowDown") {
+    moveDown();
+  }
 
-    const afterBoard = JSON.stringify(board);
+  let afterBoard = JSON.stringify(board);
 
-    if (beforeBoard !== afterBoard) {
-      addRandomTile();
-    }
-
+  if (beforeBoard !== afterBoard) {
+    addRandomTile();
     updateBoard();
   }
 }
+
 
 
 function slideRowLeft(row) {
@@ -103,4 +109,42 @@ function mergeRowLeft(row) {
 }
 function boardsAreEqual(board1, board2) {
   return JSON.stringify(board1) === JSON.stringify(board2);
+}
+function reverseRow(row) {
+  return row.slice().reverse();
+}
+function moveRight() {
+  for (let i = 0; i < boardSize; i++) {
+    let reversedRow = reverseRow(board[i]);
+    reversedRow = mergeRowLeft(reversedRow);
+    board[i] = reverseRow(reversedRow);
+  }
+}
+function getColumn(colIndex) {
+  let column = [];
+  for (let i = 0; i < boardSize; i++) {
+    column.push(board[i][colIndex]);
+  }
+  return column;
+}
+function setColumn(colIndex, column) {
+  for (let i = 0; i < boardSize; i++) {
+    board[i][colIndex] = column[i];
+  }
+}
+function moveUp() {
+  for (let col = 0; col < boardSize; col++) {
+    let column = getColumn(col);
+    column = mergeRowLeft(column);
+    setColumn(col, column);
+  }
+}
+function moveDown() {
+  for (let col = 0; col < boardSize; col++) {
+    let column = getColumn(col);
+    column = reverseRow(column);
+    column = mergeRowLeft(column);
+    column = reverseRow(column);
+    setColumn(col, column);
+  }
 }
