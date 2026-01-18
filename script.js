@@ -237,6 +237,14 @@ function updateScore() {
 let touchStartX = 0;
 let touchStartY = 0;
 
+document.addEventListener(
+  "touchmove",
+  function (event) {
+    event.preventDefault();
+  },
+  { passive: false }
+);
+
 document.addEventListener("touchstart", function (event) {
   const touch = event.touches[0];
   touchStartX = touch.clientX;
@@ -285,10 +293,3 @@ function updateHighScore() {
     "High Score: " + localStorage.getItem("highScore");
 }
 
-document.addEventListener(
-  "touchmove",
-  function (event) {
-    event.preventDefault();
-  },
-  { passive: false }
-);
