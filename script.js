@@ -53,8 +53,16 @@ document.addEventListener("keydown", handleKeyDown);
 
 function handleKeyDown(event) {
   if (event.key === "ArrowLeft") {
+    const beforeBoard = JSON.stringify(board);
+
     moveLeft();
-    addRandomTile();
+
+    const afterBoard = JSON.stringify(board);
+
+    if (beforeBoard !== afterBoard) {
+      addRandomTile();
+    }
+
     updateBoard();
   }
 }
@@ -92,4 +100,7 @@ function mergeRowLeft(row) {
   row = slideRowLeft(row);
 
   return row;
+}
+function boardsAreEqual(board1, board2) {
+  return JSON.stringify(board1) === JSON.stringify(board2);
 }
