@@ -49,7 +49,8 @@ function startGame() {
 startGame();
 
 
-document.addEventListener("keydown", handleKeyDown);
+window.addEventListener("keydown", handleKeyDown);
+
 
 function handleKeyDown(event) {
   if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) {
