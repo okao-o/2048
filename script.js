@@ -86,11 +86,6 @@ if (isGameOver()) {
   alert("ゲームオーバー");
 }
 
-  }
-}
-
-
-
 
 
 function slideRowLeft(row) {
