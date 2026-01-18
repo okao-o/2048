@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: Arial, sans-serif;
   text-align: center;
@@ -5,27 +9,25 @@ body {
   touch-action: none;
 }
 
-/* 盤面を大きくする */
 #game-board {
-  width: 360px;
-  height: 360px;
+  width: 90vw;
+  max-width: 360px;
   margin: 20px auto;
   background-color: #bbada0;
 
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr); /* ★ これが決定打 */
-
   gap: 12px;
   padding: 12px;
+
   border-radius: 10px;
 }
 
-
-/* ★ 重要：セルのサイズを固定 */
 .cell {
   background-color: #cdc1b4;
   border-radius: 5px;
+
+  aspect-ratio: 1 / 1; /* ★ 正方形を保証 */
 
   display: flex;
   justify-content: center;
@@ -34,18 +36,4 @@ body {
   font-size: 32px;
   font-weight: bold;
 }
-
-
-/* タイル色 */
-.cell.tile-2    { background-color: #eee4da; color: #776e65; }
-.cell.tile-4    { background-color: #ede0c8; color: #776e65; }
-.cell.tile-8    { background-color: #f2b179; color: #f9f6f2; }
-.cell.tile-16   { background-color: #f59563; color: #f9f6f2; }
-.cell.tile-32   { background-color: #f67c5f; color: #f9f6f2; }
-.cell.tile-64   { background-color: #f65e3b; color: #f9f6f2; }
-.cell.tile-128  { background-color: #edcf72; color: #f9f6f2; font-size: 24px; }
-.cell.tile-256  { background-color: #edcc61; color: #f9f6f2; font-size: 24px; }
-.cell.tile-512  { background-color: #edc850; color: #f9f6f2; font-size: 24px; }
-.cell.tile-1024 { background-color: #edc53f; color: #f9f6f2; font-size: 20px; }
-.cell.tile-2048 { background-color: #edc22e; color: #f9f6f2; font-size: 20px; }
 
