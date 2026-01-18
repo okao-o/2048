@@ -1,36 +1,7 @@
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  background-color: #faf8ef;
-  touch-action: none;
-}
-
-/* 盤面 */
-#game-board {
-  width: 90vw;
-  max-width: 360px;
-
-  aspect-ratio: 1 / 1;   /* ★ 盤面を必ず正方形にする */
-  margin: 20px auto;
-  background-color: #bbada0;
-
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr); /* ★ 行の高さを強制 */
-
-  gap: 12px;
-  padding: 12px;
-  border-radius: 10px;
-}
-
-/* セル */
+/* 空マス */
 .cell {
-  background-color: #cdc1b4;
-  border-radius: 5px;
+  background-color: #d6cec3;
+  border-radius: 8px;
 
   display: flex;
   justify-content: center;
@@ -38,19 +9,22 @@ body {
 
   font-size: 32px;
   font-weight: bold;
-  line-height: 1; /* ★ 文字による高さ影響を遮断 */
+  color: #5c5346;
+  line-height: 1;
 }
 
-/* タイル色（変更なし） */
-.cell.tile-2    { background-color: #eee4da; color: #776e65; }
-.cell.tile-4    { background-color: #ede0c8; color: #776e65; }
-.cell.tile-8    { background-color: #f2b179; color: #f9f6f2; }
-.cell.tile-16   { background-color: #f59563; color: #f9f6f2; }
-.cell.tile-32   { background-color: #f67c5f; color: #f9f6f2; }
-.cell.tile-64   { background-color: #f65e3b; color: #f9f6f2; }
-.cell.tile-128  { background-color: #edcf72; color: #f9f6f2; font-size: 24px; }
-.cell.tile-256  { background-color: #edcc61; color: #f9f6f2; font-size: 24px; }
-.cell.tile-512  { background-color: #edc850; color: #f9f6f2; font-size: 24px; }
-.cell.tile-1024 { background-color: #edc53f; color: #f9f6f2; font-size: 20px; }
-.cell.tile-2048 { background-color: #edc22e; color: #f9f6f2; font-size: 20px; }
+/* タイル（くすみ系） */
+.cell.tile-2    { background-color: #eee6db; }
+.cell.tile-4    { background-color: #e6dccf; }
+.cell.tile-8    { background-color: #d6bfa8; color: #ffffff; }
+.cell.tile-16   { background-color: #c8a98d; color: #ffffff; }
+.cell.tile-32   { background-color: #b8906f; color: #ffffff; }
+.cell.tile-64   { background-color: #a8765a; color: #ffffff; }
+
+.cell.tile-128  { background-color: #c7b07b; color: #ffffff; font-size: 24px; }
+.cell.tile-256  { background-color: #bfa66b; color: #ffffff; font-size: 24px; }
+.cell.tile-512  { background-color: #b79c5a; color: #ffffff; font-size: 24px; }
+
+.cell.tile-1024 { background-color: #a8904a; color: #ffffff; font-size: 20px; }
+.cell.tile-2048 { background-color: #9c843d; color: #ffffff; font-size: 20px; }
 
