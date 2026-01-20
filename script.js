@@ -268,3 +268,7 @@ function submitScore(nickname, score) {
 }
 
 
+submitScore(
+  localStorage.getItem("nickname"),
+  Number(localStorage.getItem("highScore"))
+);
