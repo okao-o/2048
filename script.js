@@ -154,3 +154,13 @@ function saveState() {
     score: score
   });
 }
+function undo() {
+  if (history.length === 0) return;
+
+  const prev = history.pop();
+  board = prev.board;
+  score = prev.score;
+
+  updateBoard();
+  updateScore();
+}
