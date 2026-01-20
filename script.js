@@ -257,8 +257,8 @@ function submitScore(nickname, score) {
     "https://docs.google.com/forms/d/e/1FAIpQLSfyP3Uit3d8wD-qpFTifTIfP2S_LWQX6WuwlWeADqVbhSMDdQ/formResponse";
 
   const data = new FormData();
-  data.append("entry.592232877", nickname);
-  data.append("entry.1645412863", score);
+  data.append("entry.592232877", nickname); // ニックネーム
+  data.append("entry.1645412863", score);   // スコア
 
   fetch(formURL, {
     method: "POST",
@@ -266,4 +266,5 @@ function submitScore(nickname, score) {
     body: data
   });
 }
+
 
