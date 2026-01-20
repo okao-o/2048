@@ -101,6 +101,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         cell.className = "cell";
 
+         if (mergedPositions.some(p => p.i === i && p.j === j)) {
+  cell.classList.add("merge");
+}
+
         if (value !== 0) {
           cell.textContent = value;
           cell.classList.add(`tile-${value}`);
@@ -137,18 +141,26 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ---------- タイル結合処理 ---------- */
-  function merge(row) {
-    row = slide(row);
+function merge(row, rowIndex, isVertical = false) {
+  row = slide(row);
 
-    for (let i = 0; i < boardSize - 1; i++) {
-      if (row[i] !== 0 && row[i] === row[i + 1]) {
-        row[i] *= 2;
-        score += row[i];
-        row[i + 1] = 0;
-      }
+  for (let i = 0; i < boardSize - 1; i++) {
+    if (row[i] !== 0 && row[i] === row[i + 1]) {
+      row[i] *= 2;
+      score += row[i];
+      row[i + 1] = 0;
+
+      mergedPositions.push(
+        isVertical
+          ? { i: i, j: rowIndex }
+          : { i: rowIndex, j: i }
+      );
     }
-    return slide(row);
   }
+  return slide(row);
+}
+   
+const col = merge(board.map(r => r[c]), c, true);
 
   /* ---------- 各方向への移動処理 ---------- */
   function moveLeft() {
