@@ -95,9 +95,7 @@ body {
 .cell {
   transition: transform 0.15s ease;
 }
-.cell.new {
-  transform: scale(0.8);
-}
+
 
 .cell.merge {
   animation: pop 0.2s ease;
