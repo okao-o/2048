@@ -145,3 +145,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }, {passive:false});
 
 });
+
+  // ---------- 操作履歴 ----------
+let history = [];
+function saveState() {
+  history.push({
+    board: board.map(row => [...row]),
+    score: score
+  });
+}
