@@ -39,3 +39,38 @@ entryBtn.addEventListener("click", () => {
   localStorage.setItem("nickname", name);
   alert(`「${name}」でランキングに参加します`);
 });
+
+
+
+const bestMap = {};
+
+data.forEach(item => {
+  if (!item.name) return;
+  if (!bestMap[item.name] || item.score > bestMap[item.name]) {
+    bestMap[item.name] = item.score;
+  }
+});
+
+const ranking = Object.entries(bestMap)
+  .map(([name, score]) => ({ name, score }))
+  .sort((a, b) => b.score - a.score);
+
+
+
+const myName = localStorage.getItem("nickname");
+
+ranking.slice(0, 10).forEach((item, i) => {
+  const li = document.createElement("li");
+  li.textContent = `${i + 1}位 ${item.name} : ${item.score}`;
+
+  if (item.name === myName) {
+    li.style.color = "#e67e22";
+    li.style.fontWeight = "bold";
+  }
+
+  list.appendChild(li);
+});
+
+
+const id = crypto.randomUUID().slice(0, 6);
+const displayName = `${name}#${id}`;
