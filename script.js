@@ -250,3 +250,20 @@ document.addEventListener("DOMContentLoaded", () => {
   startGame();
 });
 
+  /* ---------- ランキング ---------- */
+
+function submitScore(nickname, score) {
+  const formURL =
+    "https://docs.google.com/forms/d/e/1FAIpQLSfyP3Uit3d8wD-qpFTifTIfP2S_LWQX6WuwlWeADqVbhSMDdQ/formResponse";
+
+  const data = new FormData();
+  data.append("entry.592232877", nickname);
+  data.append("entry.1645412863", score);
+
+  fetch(formURL, {
+    method: "POST",
+    mode: "no-cors",
+    body: data
+  });
+}
+
