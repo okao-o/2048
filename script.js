@@ -226,6 +226,39 @@ document.addEventListener("DOMContentLoaded", () => {
       history.pop();
     }
   });
+   
+  /* ---------- タッチ操作（スマホ対応） ---------- */
+
+  let startX = 0;
+  let startY = 0;
+
+  gameBoard.addEventListener("touchstart", e => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+  }, { passive: false });
+
+  gameBoard.addEventListener("touchmove", e => {
+    e.preventDefault(); // 画面スクロール防止
+  }, { passive: false });
+
+  gameBoard.addEventListener("touchend", e => {
+    const dx = e.changedTouches[0].clientX - startX;
+    const dy = e.changedTouches[0].clientY - startY;
+
+    if (Math.abs(dx) > Math.abs(dy)) {
+      if (dx > 30) {
+        window.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight" }));
+      } else if (dx < -30) {
+        window.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowLeft" }));
+      }
+    } else {
+      if (dy > 30) {
+        window.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown" }));
+      } else if (dy < -30) {
+        window.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowUp" }));
+      }
+    }
+  }, { passive: false });
 
   /* ---------- スコア送信（Googleフォーム） ---------- */
   function submitScoreIfReady() {
