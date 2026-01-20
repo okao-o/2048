@@ -96,10 +96,6 @@ body {
   transition: transform 0.15s ease;
 }
 
-.cell.new {
-  transform: scale(1);
-}
-
 .cell.merge {
   animation: pop 0.2s ease;
 }
