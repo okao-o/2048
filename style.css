@@ -91,3 +91,21 @@ body {
 
 #continue-btn { background-color: #8f8be8; color: #fff; }
 #restart-btn  { background-color: #d6cec3; color: #5c5346; }
+
+.cell {
+  transition: transform 0.15s ease;
+}
+.cell.new {
+  transform: scale(0.8);
+}
+
+.cell.merge {
+  animation: pop 0.2s ease;
+}
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
