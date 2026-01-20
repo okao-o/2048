@@ -24,3 +24,18 @@ fetch(sheetURL)
     });
   });
 
+
+
+const nicknameInput = document.getElementById("nickname-input");
+const entryBtn = document.getElementById("entry-btn");
+
+entryBtn.addEventListener("click", () => {
+  const name = nicknameInput.value.trim();
+  if (!name) {
+    alert("ニックネームを入力してください");
+    return;
+  }
+
+  localStorage.setItem("nickname", name);
+  alert(`「${name}」でランキングに参加します`);
+});
