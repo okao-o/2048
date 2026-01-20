@@ -1,5 +1,5 @@
 const sheetURL =
-  "https://docs.google.com/forms/d/e/1FAIpQLSfyP3Uit3d8wD-qpFTifTIfP2S_LWQX6WuwlWeADqVbhSMDdQ//viewform";
+  "https://docs.google.com/forms/d/e/1FAIpQLSfyP3Uit3d8wD-qpFTifTIfP2S_LWQX6WuwlWeADqVbhSMDdQ/gviz/tq?tqx=out:json";
 
 fetch(sheetURL)
   .then(res => res.text())
