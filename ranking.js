@@ -8,8 +8,8 @@ fetch(sheetURL)
     const rows = json.table.rows;
 
     const data = rows.map(r => ({
-      name: r.c[0]?.v ?? "",
-      score: Number(r.c[1]?.v ?? 0)
+      name: r.c[1]?.v ?? "",
+      score: Number(r.c[2]?.v ?? 0)
     }));
 
     data.sort((a, b) => b.score - a.score);
