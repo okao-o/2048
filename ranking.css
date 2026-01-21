@@ -41,6 +41,43 @@
   }
 }
 
+
+/* インフォメーションボタン */
+#info-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+
+  border: 2px solid #555;
+  background: white;
+  color: #555;
+
+  font-weight: bold;
+  font-size: 1.1rem;
+  line-height: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+}
+
+/* ホバー時（PC） */
+#info-btn:hover {
+  background: #555;
+  color: white;
+}
+
+/* スマホ用：少し大きく */
+@media (max-width: 600px) {
+  #info-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 1.3rem;
+  }
+}
+
 /* ---------- ランキング ---------- */
 #ranking-list {
   margin: 0 auto;
