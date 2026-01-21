@@ -283,16 +283,17 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ---------- ハイスコア更新時のみ送信 ---------- */
-  function submitScoreIfUpdated() {
-    const nickname = localStorage.getItem("nickname");
-    if (!nickname) return;
+function submitScoreIfUpdated() {
+  const nicknameWithId = localStorage.getItem("nicknameWithId");
+  if (!nicknameWithId) return;
 
-    const currentHighScore = Number(localStorage.getItem("highScore") || 0);
-    if (currentHighScore > startHighScore) {
-      submitScore(nickname, currentHighScore);
-      startHighScore = currentHighScore;
-    }
+  const currentHighScore = Number(localStorage.getItem("highScore") || 0);
+  if (currentHighScore > startHighScore) {
+    submitScore(nicknameWithId, currentHighScore);
+    startHighScore = currentHighScore;
   }
+}
+
 
   /* ---------- ボタン ---------- */
   document.getElementById("restart").addEventListener("click", startGame);
