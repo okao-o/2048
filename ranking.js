@@ -155,3 +155,15 @@ window.addEventListener("keydown", (e) => {
     modal.classList.add("hidden");
   }
 });
+
+/* ---------- infoモーダル 初回自動表示 ---------- */
+const INFO_SEEN_KEY = "infoModalSeen";
+
+if (!localStorage.getItem(INFO_SEEN_KEY)) {
+  // 少し遅らせて自然に表示
+  setTimeout(() => {
+    modal.classList.remove("hidden");
+  }, 500);
+
+  localStorage.setItem(INFO_SEEN_KEY, "true");
+}
