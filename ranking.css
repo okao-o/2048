@@ -1,27 +1,21 @@
 /* ---------- 全体 ---------- */
-html, body {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-body {
+.ranking-container {
   margin: 0 auto;
   padding: 24px 0;
 }
 
 /* ---------- PC ---------- */
 @media (min-width: 601px) {
-  body {
+  .ranking-container {
     max-width: 40%;
   }
 }
 
 /* ---------- スマホ ---------- */
 @media (max-width: 600px) {
-  body {
+  .ranking-container {
     max-width: 92%;
-    font-size: 0.8rem;
+    font-size: 1.2rem;
   }
 
   h1 {
