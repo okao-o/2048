@@ -29,6 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function startGame() {
+    submitScoreIfUpdated(); // ← 追加（中断扱い）
+    
     initBoard();
     score = 0;
     gameOver = false;
@@ -224,11 +226,13 @@ document.addEventListener("DOMContentLoaded", () => {
         submitScoreIfReady();
         document.getElementById("clear-overlay").classList.remove("hidden");
         gameCleared = true;
+        submitScoreIfUpdated();// ← 追加
       }
 
       if (!hasEmpty() && !canMerge()) {
         submitScoreIfReady();
         gameOver = true;
+        submitScoreIfUpdated(); // ← 追加
         alert("詰み😭");
       }
     } else {
