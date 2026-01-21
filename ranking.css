@@ -29,38 +29,51 @@
 }
 
 @media (max-width: 600px) {
-  
-body {
-    font-size: 1.1rem;
+
+  body {
+    max-width: 92%;
+    margin: 0 auto;
+    font-size: 1.4rem; /* ← 全体を一気に拡大 */
   }
 
   h1 {
-    font-size: 1.8rem;
+    font-size: 2.4rem;
+    margin-bottom: 24px;
+  }
+
+  #entry-box {
+    margin-bottom: 24px;
+  }
+
+  #nickname-input {
+    font-size: 1.4rem;
+    padding: 12px 16px;
+    width: 100%;
+  }
+
+  #entry-btn,
+  button {
+    font-size: 1.3rem;
+    padding: 14px 20px;
+    margin-top: 12px;
   }
 
   .ranking-item {
-    font-size: 1.15rem;
-    grid-template-columns: 56px 1fr 100px;
-    padding: 14px 16px;
+    grid-template-columns: 64px 1fr 120px;
+    font-size: 1.4rem;
+    padding: 18px 20px;
+    margin-bottom: 14px;
   }
 
   .rank {
-    font-size: 1.4rem;
-  }
-
-  .name {
-    font-size: 1.15rem;
-  }
-
-  .score {
-    font-size: 1.15rem;
+    font-size: 1.8rem;
   }
 
   .rank-id {
-    font-size: 0.85em;
+    font-size: 0.9em;
   }
-  
 }
+
 
 .rank-id {
   margin-left: 4px;
