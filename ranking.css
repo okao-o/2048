@@ -154,6 +154,9 @@
   width: 90%;
   max-width: 480px;
 
+  max-height: 80vh; 
+  overflow-y: auto;  
+
   transform: scale(1);
   transition: transform 0.3s ease;
 }
