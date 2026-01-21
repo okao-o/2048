@@ -58,7 +58,9 @@ ranking.forEach(item => {
 /* ---------- ランキング描画 ---------- */
 ranking.forEach((item, i) => {
   const li = document.createElement("li");
-
+  
+  li.classList.add("ranking-item");
+  
   const [baseName, id] = item.name.split("#");
   const isDuplicated = baseNameCount[baseName] > 1;
 
