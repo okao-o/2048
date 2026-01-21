@@ -58,32 +58,19 @@ ranking.forEach(item => {
 /* ---------- ランキング描画 ---------- */
 ranking.forEach((item, i) => {
   const li = document.createElement("li");
-  
   li.classList.add("ranking-item");
- 
-  li.innerHTML = `
-  <span class="rank">${i + 1}位</span>
-  <span class="name">
-    ${baseName}
-    ${isDuplicated ? `<span class="rank-id">#${id}</span>` : ""}
-  </span>
-  <span class="score">${item.score}</span>
-`;
-  
+
   const [baseName, id] = item.name.split("#");
   const isDuplicated = baseNameCount[baseName] > 1;
 
-  /* 表示名を作成 */
-  if (isDuplicated) {
-    li.innerHTML = `
-      ${i + 1}位 
-      <span class="rank-name">${baseName}</span>
-      <span class="rank-id">#${id}</span>
-      : ${item.score}
-    `;
-  } else {
-    li.textContent = `${i + 1}位 ${baseName} : ${item.score}`;
-  }
+  li.innerHTML = `
+    <span class="rank">${i + 1}位</span>
+    <span class="name">
+      ${baseName}
+      ${isDuplicated ? `<span class="rank-id">#${id}</span>` : ""}
+    </span>
+    <span class="score">${item.score}</span>
+  `;
 
   /* 自分のスコアを強調 */
   if (item.name === myName) {
@@ -93,6 +80,7 @@ ranking.forEach((item, i) => {
 
   list.appendChild(li);
 });
+
     
 });
 
