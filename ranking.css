@@ -200,3 +200,8 @@
   right: 0;
   transform: translateY(-50%);
 }
+
+body {
+  min-height: 100vh;
+  overflow-y: auto;
+}
