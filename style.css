@@ -3,8 +3,6 @@ body {
   text-align: center;
   background-color: #faf8ef;
   margin: 0;
-  touch-action: none;
-  overscroll-behavior: none;
 }
 
 #game-board {
@@ -106,3 +104,10 @@ body {
   100% { transform: scale(1); }
 }
 
+/* ===============================
+   ゲームページ専用：スクロール無効
+   =============================== */
+.game-page {
+  touch-action: none;
+  overscroll-behavior: none;
+}
