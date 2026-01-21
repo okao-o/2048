@@ -15,7 +15,7 @@
 @media (max-width: 600px) {
   .ranking-container {
     max-width: 92%;
-    font-size: 1.2rem;
+    font-size: 1.0rem;
   }
 
   h1 {
@@ -110,6 +110,8 @@
 .name {
   font-weight: 600;
   white-space: nowrap;
+
+  font-size: clamp(0.8rem, 3.5vw, 1.1rem);
 }
 
 .score {
@@ -159,6 +161,9 @@
 
   transform: scale(1);
   transition: transform 0.3s ease;
+
+  font-size: 0.95em;
+  line-height: 1.6;
 }
 
 /* ふわっと演出 */
