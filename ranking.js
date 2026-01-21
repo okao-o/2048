@@ -1,3 +1,5 @@
+document.addEventListener("DOMContentLoaded", () => {
+
 /* ---------- Googleフォーム送信 ---------- */
 function submitScore(nickname, score) {
   const formURL =
@@ -167,3 +169,5 @@ if (!localStorage.getItem(INFO_SEEN_KEY)) {
 
   localStorage.setItem(INFO_SEEN_KEY, "true");
 }
+  
+});
