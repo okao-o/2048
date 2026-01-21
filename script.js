@@ -29,8 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function startGame() {
-    submitScoreIfUpdated(); // ← 追加（中断扱い）
-    
+    submitScoreIfUpdated(); // 中断扱いとして送信判定
+
     initBoard();
     score = 0;
     gameOver = false;
@@ -225,12 +225,12 @@ document.addEventListener("DOMContentLoaded", () => {
       if (has2048() && !gameCleared) {
         document.getElementById("clear-overlay").classList.remove("hidden");
         gameCleared = true;
-        submitScoreIfUpdated();// ← 追加
+        submitScoreIfUpdated();
       }
 
       if (!hasEmpty() && !canMerge()) {
         gameOver = true;
-        submitScoreIfUpdated(); // ← 追加
+        submitScoreIfUpdated();
         alert("詰み😭");
       }
     } else {
@@ -263,11 +263,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }, { passive: false });
 
-  /* ---------- ランキング送信 ---------- */
-  function submitScoreIfReady() {
-    const nickname = localStorage.getItem("nickname");
-    if (!nickname) return;
+  /* ---------- ゲーム開始時のハイスコア記録 ---------- */
+  let startHighScore = Number(localStorage.getItem("highScore") || 0);
 
+  /* ---------- Googleフォーム送信（共通） ---------- */
+  function submitScore(nickname, score) {
     const formURL =
       "https://docs.google.com/forms/d/e/1FAIpQLSfyP3Uit3d8wD-qpFTifTIfP2S_LWQX6WuwlWeADqVbhSMDdQ/formResponse";
 
@@ -282,24 +282,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  
-/* ---------- ゲーム開始時のハイスコア記録 ---------- */
-let startHighScore = Number(localStorage.getItem("highScore") || 0);
+  /* ---------- ハイスコア更新時のみ送信 ---------- */
+  function submitScoreIfUpdated() {
+    const nickname = localStorage.getItem("nickname");
+    if (!nickname) return;
 
-/* ---------- Googleフォーム送信 ---------- */
-function submitScoreIfUpdated() {
-  const nickname = localStorage.getItem("nickname");
-  if (!nickname) return;
-
-  const currentHighScore = Number(localStorage.getItem("highScore") || 0);
-  if (currentHighScore > startHighScore) {
-    submitScore(nickname, currentHighScore);
-    startHighScore = currentHighScore;
+    const currentHighScore = Number(localStorage.getItem("highScore") || 0);
+    if (currentHighScore > startHighScore) {
+      submitScore(nickname, currentHighScore);
+      startHighScore = currentHighScore;
+    }
   }
-}
 
-
-  
   /* ---------- ボタン ---------- */
   document.getElementById("restart").addEventListener("click", startGame);
   document.getElementById("restart-btn").addEventListener("click", startGame);
