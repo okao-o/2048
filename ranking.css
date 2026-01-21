@@ -179,9 +179,24 @@
   cursor: pointer;
 }
 
+
+
+
 .ranking-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
+  position: relative;
+  margin-bottom: 24px;
+}
+
+/* 見出しは純粋に中央 */
+.ranking-header h1 {
+  text-align: center;
+  margin: 0;
+}
+
+/* infoボタンは右端に独立配置 */
+#info-btn {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
 }
