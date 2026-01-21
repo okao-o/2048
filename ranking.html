@@ -11,32 +11,6 @@
   
   <div class="ranking-container">
     
-    <button id="info-btn" class="info-btn">i</button>
-
-<div id="info-modal" class="info-modal hidden">
-  <div class="info-content">
-    <h2>ランキングについて</h2>
-
-    <p>
-      遊んでいただきありがとうございます！
-      本ランキングは Googleフォーム・スプレッドシートを利用して作成されています。
-      収集される情報はニックネームとスコアのみで、個人情報は一切取得されません。
-    </p>
-
-    <p>
-      ニックネームやハイスコアは、ブラウザのローカルストレージを利用して保存されます。
-      シークレットモードや履歴を保存しない設定の場合、タブを閉じると情報が消える可能性があります。
-    </p>
-
-    <p>
-      公序良俗に反するニックネームの登録はご遠慮ください。
-    </p>
-
-    <button id="close-info">閉じる</button>
-  </div>
-</div>
-
-    
   <h1>🏆RANKING🏆</h1>
   
 <div id="entry-box">
@@ -55,6 +29,33 @@
   </div>
   
   <script src="ranking.js"></script>
+  <!-- ---------- インフォメーションモーダル ---------- -->
+<div id="info-modal" class="modal hidden">
+  <div class="modal-content">
+    <button id="modal-close" aria-label="閉じる">×</button>
+
+    <h2>ランキングについて</h2>
+
+    <p>
+      Thank you for playing!!!🥳<br>
+      ・ランキングは任意参加です。<br>
+      ・ニックネームを登録すると、その時点でのハイスコアがランキングに記録されます。<br>
+      ・参加後は、ハイスコアを更新するたび自動で点数がランキングに反映されます。<br>
+      ・Webブラウザのローカルストレージを利用してユーザーを識別しています。<br>
+      　ニックネームとスコア以外の情報は一切取得していません。
+    </p>
+
+    <p>
+      ※ シークレットモードや履歴を保存しないブラウザ設定の場合、<br>
+      ニックネームとハイスコアは保存されません。
+    </p>
+
+    <p>
+      ※ 公序良俗に反するニックネームはお控えください。
+    </p>
+  </div>
+</div>
+
 </body>
 </html>
 
