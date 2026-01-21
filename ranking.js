@@ -136,3 +136,33 @@ infoBtn.addEventListener("click", () => {
 closeInfo.addEventListener("click", () => {
   infoModal.classList.add("hidden");
 });
+
+
+/* ---------- インフォメーションモーダル制御 ---------- */
+const infoBtn = document.getElementById("info-btn");
+const modal = document.getElementById("info-modal");
+const closeBtn = document.getElementById("modal-close");
+
+/* 開く */
+infoBtn.addEventListener("click", () => {
+  modal.classList.remove("hidden");
+});
+
+/* ×ボタンで閉じる */
+closeBtn.addEventListener("click", () => {
+  modal.classList.add("hidden");
+});
+
+/* 背景クリックで閉じる */
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    modal.classList.add("hidden");
+  }
+});
+
+/* Escキーで閉じる */
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    modal.classList.add("hidden");
+  }
+});
