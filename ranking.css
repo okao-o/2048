@@ -1,0 +1,46 @@
+.ranking-item {
+  display: grid;
+  grid-template-columns: 60px 1fr 120px;
+  align-items: center;
+  gap: 12px;
+
+  padding: 12px 16px;
+  margin-bottom: 8px;
+
+  background: #faf8ef;
+  border-radius: 8px;
+
+  font-size: 1.1rem;
+}
+
+.rank {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+.name {
+  font-weight: 600;
+}
+
+.score {
+  text-align: right;
+  font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  .ranking-item {
+    font-size: 1rem;
+    grid-template-columns: 48px 1fr 90px;
+  }
+
+  .rank {
+    font-size: 1.2rem;
+  }
+}
+
+.rank-id {
+  margin-left: 4px;
+  font-size: 0.8em;
+  color: #999;
+}
