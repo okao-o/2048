@@ -175,3 +175,10 @@
   font-size: 1.6rem;
   cursor: pointer;
 }
+
+.ranking-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
