@@ -284,6 +284,24 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  
+/* ---------- ゲーム開始時のハイスコア記録 ---------- */
+let startHighScore = Number(localStorage.getItem("highScore") || 0);
+
+/* ---------- Googleフォーム送信 ---------- */
+function submitScoreIfUpdated() {
+  const nickname = localStorage.getItem("nickname");
+  if (!nickname) return;
+
+  const currentHighScore = Number(localStorage.getItem("highScore") || 0);
+  if (currentHighScore > startHighScore) {
+    submitScore(nickname, currentHighScore);
+    startHighScore = currentHighScore;
+  }
+}
+
+
+  
   /* ---------- ボタン ---------- */
   document.getElementById("restart").addEventListener("click", startGame);
   document.getElementById("restart-btn").addEventListener("click", startGame);
