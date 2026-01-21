@@ -223,14 +223,12 @@ document.addEventListener("DOMContentLoaded", () => {
       updateScore();
 
       if (has2048() && !gameCleared) {
-        submitScoreIfReady();
         document.getElementById("clear-overlay").classList.remove("hidden");
         gameCleared = true;
         submitScoreIfUpdated();// ← 追加
       }
 
       if (!hasEmpty() && !canMerge()) {
-        submitScoreIfReady();
         gameOver = true;
         submitScoreIfUpdated(); // ← 追加
         alert("詰み😭");
