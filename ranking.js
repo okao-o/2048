@@ -122,3 +122,17 @@ entryBtn.addEventListener("click", () => {
   entryBox.style.display = "none";
   alert(`「${baseName}」でランキングに参加しました！`);
 });
+
+
+  /* 　infoボタン　*/
+const infoBtn = document.getElementById("info-btn");
+const infoModal = document.getElementById("info-modal");
+const closeInfo = document.getElementById("close-info");
+
+infoBtn.addEventListener("click", () => {
+  infoModal.classList.remove("hidden");
+});
+
+closeInfo.addEventListener("click", () => {
+  infoModal.classList.add("hidden");
+});
