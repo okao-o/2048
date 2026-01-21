@@ -96,3 +96,7 @@ body {
   padding: 24px 0;
 }
 
+html, body {
+  width: 100%;
+  display: block;
+}
