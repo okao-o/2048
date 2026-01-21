@@ -1,31 +1,8 @@
-.ranking-item {
-  display: grid;
-  grid-template-columns: 60px 1fr 120px;
-  align-items: center;
-  gap: 12px;
-
-  padding: 12px 16px;
-  margin-bottom: 8px;
-
-  background: #faf8ef;
-  border-radius: 8px;
-
-  font-size: 1.1rem;
-}
-
-.rank {
-  text-align: center;
-  font-weight: bold;
-  font-size: 1.3rem;
-}
-
-.name {
-  font-weight: 600;
-}
-
-.score {
-  text-align: right;
-  font-weight: bold;
+/* ---------- 全体 ---------- */
+html, body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -33,17 +10,17 @@ body {
   padding: 24px 0;
 }
 
+/* ---------- PC ---------- */
 @media (min-width: 601px) {
   body {
-    max-width: 40%; /* PCでは左右に余白を作る */
+    max-width: 40%;
   }
 }
 
+/* ---------- スマホ ---------- */
 @media (max-width: 600px) {
-
   body {
     max-width: 92%;
-    margin: 0 auto;
     font-size: 1.2rem;
   }
 
@@ -68,37 +45,10 @@ body {
     padding: 14px 20px;
     margin-top: 12px;
   }
-
-  .ranking-item {
-    grid-template-columns: 56px 1fr auto;
-    font-size: 1.0rem;
-    padding: 18px 20px;
-    margin-bottom: 8px;
-  }
-
-  .rank {
-    font-size: 1.4rem;
-  }
-
-  .rank-id {
-    font-size: 0.7em;
-  }
-
-  .name {
-  white-space: nowrap;
-　}
-  
 }
 
-
-.rank-id {
-  margin-left: 4px;
-  font-size: 0.8em;
-  color: #999;
-}
-
+/* ---------- ランキング ---------- */
 #ranking-list {
-  max-width: 100%;
   margin: 0 auto;
   padding: 0;
 }
@@ -107,13 +57,37 @@ body {
   list-style: none;
 }
 
-body {
-  max-width: 50%;
-  margin: 0 auto;
-  padding: 24px 0;
+.ranking-item {
+  display: grid;
+  grid-template-columns: 60px 1fr 120px;
+  align-items: center;
+  gap: 12px;
+
+  padding: 12px 16px;
+  margin-bottom: 8px;
+
+  background: #faf8ef;
+  border-radius: 8px;
 }
 
-html, body {
-  width: 100%;
-  display: block;
+.rank {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+.name {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.score {
+  text-align: right;
+  font-weight: bold;
+}
+
+.rank-id {
+  margin-left: 4px;
+  font-size: 0.8em;
+  color: #999;
 }
