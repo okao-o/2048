@@ -82,6 +82,8 @@ ranking.forEach((item, i) => {
 
   list.appendChild(li);
 });
+    
+});
 
 /* ---------- ニックネーム登録（初回のみ） ---------- */
 const nicknameInput = document.getElementById("nickname-input");
