@@ -1,22 +1,19 @@
-/* =========================================================
-   ページ読み込み完了後にゲーム全体を初期化する
-   ========================================================= */
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* ---------- ゲーム基本設定 ---------- */
-  const boardSize = 4;              // 盤面サイズ（4×4）
-  let board = [];                   // 盤面の数値管理用配列
-  let score = 0;                    // 現在のスコア
-  let gameOver = false;             // ゲームオーバー判定
-  let gameCleared = false;          // 2048達成済み判定
+  /* ---------- 基本設定 ---------- */
+  const boardSize = 4;
+  let board = [];
+  let score = 0;
+  let gameOver = false;
+  let gameCleared = false;
 
-  let history = [];                 // Undo 用の履歴
-  let mergedPositions = [];         // マージ演出用
-  let newTilePosition = null;       // 新規タイル位置
+  let history = [];
+  let mergedPositions = [];
+  let newTilePosition = null;
 
   const gameBoard = document.getElementById("game-board");
 
-  /* ---------- セル（16マス）の生成 ---------- */
+  /* ---------- セル生成 ---------- */
   for (let i = 0; i < boardSize * boardSize; i++) {
     const div = document.createElement("div");
     div.className = "cell";
@@ -24,20 +21,21 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   const cells = document.querySelectorAll(".cell");
 
-  /* ---------- 盤面配列の初期化 ---------- */
+  /* ---------- 初期化 ---------- */
   function initBoard() {
     board = Array.from({ length: boardSize }, () =>
       Array(boardSize).fill(0)
     );
   }
 
-  /* ---------- ゲーム開始／リスタート処理 ---------- */
   function startGame() {
     initBoard();
     score = 0;
     gameOver = false;
     gameCleared = false;
     history = [];
+    mergedPositions = [];
+    newTilePosition = null;
 
     cells.forEach(c => {
       c.textContent = "";
@@ -52,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("clear-overlay").classList.add("hidden");
   }
 
-  /* ---------- Undo 用に盤面状態を保存 ---------- */
+  /* ---------- Undo ---------- */
   function saveState() {
     history.push({
       board: board.map(r => [...r]),
@@ -60,21 +58,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* ---------- 直前の状態へ戻す ---------- */
   function undo() {
     if (!history.length) return;
-
     const prev = history.pop();
     board = prev.board.map(r => [...r]);
     score = prev.score;
-
     updateBoard();
     updateScore();
   }
 
   document.getElementById("undo").addEventListener("click", undo);
 
-  /* ---------- ランダムタイル生成 ---------- */
+  /* ---------- タイル生成 ---------- */
   function addRandomTile() {
     const empty = [];
     board.forEach((row, i) =>
@@ -82,7 +77,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (v === 0) empty.push({ i, j });
       })
     );
-
     if (!empty.length) return;
 
     const pos = empty[Math.floor(Math.random() * empty.length)];
@@ -90,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
     newTilePosition = pos;
   }
 
-  /* ---------- 盤面描画処理 ---------- */
+  /* ---------- 描画 ---------- */
   function updateBoard() {
     let index = 0;
 
@@ -101,16 +95,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
         cell.className = "cell";
 
-         if (mergedPositions.some(p => p.i === i && p.j === j)) {
-  cell.classList.add("merge");
-}
-
         if (value !== 0) {
           cell.textContent = value;
           cell.classList.add(`tile-${value}`);
+
+          if (
+            newTilePosition &&
+            newTilePosition.i === i &&
+            newTilePosition.j === j
+          ) {
+            cell.classList.add("new");
+          }
+
+          if (mergedPositions.some(p => p.i === i && p.j === j)) {
+            cell.classList.add("merge");
+          }
         } else {
           cell.textContent = "";
         }
+
         index++;
       }
     }
@@ -119,80 +122,74 @@ document.addEventListener("DOMContentLoaded", () => {
     newTilePosition = null;
   }
 
-  /* ---------- スコア表示・ハイスコア保存 ---------- */
   function updateScore() {
     document.getElementById("score").textContent = "Score: " + score;
 
-    const highScore = Math.max(
+    const hs = Math.max(
       score,
       Number(localStorage.getItem("highScore") || 0)
     );
 
-    localStorage.setItem("highScore", highScore);
+    localStorage.setItem("highScore", hs);
     document.getElementById("high-score").textContent =
-      "High Score: " + highScore;
+      "High Score: " + hs;
   }
 
-  /* ---------- 行を詰める（0を右に寄せる） ---------- */
+  /* ---------- 移動ロジック ---------- */
   function slide(row) {
     const r = row.filter(v => v);
     while (r.length < boardSize) r.push(0);
     return r;
   }
 
-  /* ---------- タイル結合処理 ---------- */
-function merge(row, rowIndex, isVertical = false) {
-  row = slide(row);
+  function merge(row, rowIndex, isVertical = false) {
+    row = slide(row);
 
-  for (let i = 0; i < boardSize - 1; i++) {
-    if (row[i] !== 0 && row[i] === row[i + 1]) {
-      row[i] *= 2;
-      score += row[i];
-      row[i + 1] = 0;
+    for (let i = 0; i < boardSize - 1; i++) {
+      if (row[i] !== 0 && row[i] === row[i + 1]) {
+        row[i] *= 2;
+        score += row[i];
+        row[i + 1] = 0;
 
-      mergedPositions.push(
-        isVertical
-          ? { i: i, j: rowIndex }
-          : { i: rowIndex, j: i }
-      );
+        mergedPositions.push(
+          isVertical
+            ? { i: i, j: rowIndex }
+            : { i: rowIndex, j: i }
+        );
+      }
     }
+    return slide(row);
   }
-  return slide(row);
-}
-   
-const col = merge(board.map(r => r[c]), c, true);
 
-  /* ---------- 各方向への移動処理 ---------- */
   function moveLeft() {
     for (let i = 0; i < boardSize; i++) {
-      board[i] = merge(board[i]);
+      board[i] = merge(board[i], i);
     }
   }
 
   function moveRight() {
     for (let i = 0; i < boardSize; i++) {
-      board[i] = merge(board[i].slice().reverse()).reverse();
+      board[i] = merge(board[i].slice().reverse(), i).reverse();
     }
   }
 
   function moveUp() {
     for (let c = 0; c < boardSize; c++) {
-      const col = merge(board.map(r => r[c]));
+      const col = merge(board.map(r => r[c]), c, true);
       for (let r = 0; r < boardSize; r++) board[r][c] = col[r];
     }
   }
 
   function moveDown() {
     for (let c = 0; c < boardSize; c++) {
-      const col = merge(board.map(r => r[c]).reverse()).reverse();
+      const col = merge(board.map(r => r[c]).reverse(), c, true).reverse();
       for (let r = 0; r < boardSize; r++) board[r][c] = col[r];
     }
   }
 
-  /* ---------- 勝敗判定 ---------- */
+  /* ---------- 判定 ---------- */
   function has2048() { return board.some(r => r.includes(2048)); }
   function hasEmpty() { return board.some(r => r.includes(0)); }
-
   function canMerge() {
     return board.some((row, i) =>
       row.some((v, j) =>
@@ -203,10 +200,10 @@ const col = merge(board.map(r => r[c]), c, true);
     );
   }
 
-  /* ---------- キーボード操作 ---------- */
+  /* ---------- 入力（キーボード） ---------- */
   window.addEventListener("keydown", e => {
     if (gameOver) return;
-    if (!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(e.key)) return;
+    if (!["ArrowLeft","ArrowRight","ArrowUp","ArrowDown"].includes(e.key)) return;
 
     e.preventDefault();
     saveState();
@@ -238,11 +235,9 @@ const col = merge(board.map(r => r[c]), c, true);
       history.pop();
     }
   });
-   
-  /* ---------- タッチ操作（スマホ対応） ---------- */
 
-  let startX = 0;
-  let startY = 0;
+  /* ---------- 入力（タッチ操作） ---------- */
+  let startX = 0, startY = 0;
 
   gameBoard.addEventListener("touchstart", e => {
     startX = e.touches[0].clientX;
@@ -250,7 +245,7 @@ const col = merge(board.map(r => r[c]), c, true);
   }, { passive: false });
 
   gameBoard.addEventListener("touchmove", e => {
-    e.preventDefault(); // 画面スクロール防止
+    e.preventDefault();
   }, { passive: false });
 
   gameBoard.addEventListener("touchend", e => {
@@ -258,21 +253,15 @@ const col = merge(board.map(r => r[c]), c, true);
     const dy = e.changedTouches[0].clientY - startY;
 
     if (Math.abs(dx) > Math.abs(dy)) {
-      if (dx > 30) {
-        window.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight" }));
-      } else if (dx < -30) {
-        window.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowLeft" }));
-      }
+      if (dx > 30) window.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight" }));
+      if (dx < -30) window.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowLeft" }));
     } else {
-      if (dy > 30) {
-        window.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown" }));
-      } else if (dy < -30) {
-        window.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowUp" }));
-      }
+      if (dy > 30) window.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown" }));
+      if (dy < -30) window.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowUp" }));
     }
   }, { passive: false });
 
-  /* ---------- スコア送信（Googleフォーム） ---------- */
+  /* ---------- ランキング送信 ---------- */
   function submitScoreIfReady() {
     const nickname = localStorage.getItem("nickname");
     if (!nickname) return;
@@ -281,8 +270,8 @@ const col = merge(board.map(r => r[c]), c, true);
       "https://docs.google.com/forms/d/e/1FAIpQLSfyP3Uit3d8wD-qpFTifTIfP2S_LWQX6WuwlWeADqVbhSMDdQ/formResponse";
 
     const data = new FormData();
-    data.append("entry.890016593", nickname);
-    data.append("entry.297700271", score);
+    data.append("entry.592232877", nickname);
+    data.append("entry.1645412863", score);
 
     fetch(formURL, {
       method: "POST",
@@ -291,13 +280,12 @@ const col = merge(board.map(r => r[c]), c, true);
     });
   }
 
-  /* ---------- 各種ボタン操作 ---------- */
+  /* ---------- ボタン ---------- */
   document.getElementById("restart").addEventListener("click", startGame);
   document.getElementById("restart-btn").addEventListener("click", startGame);
   document.getElementById("continue-btn").addEventListener("click", () => {
     document.getElementById("clear-overlay").classList.add("hidden");
   });
 
-  /* ---------- 初回起動 ---------- */
   startGame();
 });
