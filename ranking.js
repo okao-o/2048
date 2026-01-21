@@ -60,6 +60,15 @@ ranking.forEach((item, i) => {
   const li = document.createElement("li");
   
   li.classList.add("ranking-item");
+ 
+  li.innerHTML = `
+  <span class="rank">${i + 1}位</span>
+  <span class="name">
+    ${baseName}
+    ${isDuplicated ? `<span class="rank-id">#${id}</span>` : ""}
+  </span>
+  <span class="score">${item.score}</span>
+`;
   
   const [baseName, id] = item.name.split("#");
   const isDuplicated = baseNameCount[baseName] > 1;
