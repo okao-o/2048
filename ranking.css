@@ -28,6 +28,17 @@
   font-weight: bold;
 }
 
+body {
+  margin: 0 auto;
+  padding: 24px 0;
+}
+
+@media (min-width: 601px) {
+  body {
+    max-width: 40%; /* PCでは左右に余白を作る */
+  }
+}
+
 @media (max-width: 600px) {
 
   body {
