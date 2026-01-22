@@ -14,7 +14,7 @@
 /* ---------- スマホ ---------- */
 @media (max-width: 600px) {
   .ranking-container {
-    max-width: 92%;
+    padding: 24px 4vw;
     font-size: 1.0rem;
   }
 
@@ -96,7 +96,7 @@
   align-items: center;
   gap: 12px;
 
-  padding: 14px 14px;
+  padding: 8px 12px;
   margin-bottom: 4px;
 
   background: #faf8ef;
@@ -126,6 +126,12 @@
   margin-left: 4px;
   font-size: 0.8em;
   color: #999;
+}
+
+.rank,
+.name,
+.score {
+  line-height: 1.2;
 }
 
 
