@@ -99,7 +99,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (value !== 0) {
           cell.textContent = value;
-          cell.classList.add(`tile-${value}`);
+if (value !== 0) {
+  cell.textContent = value;
+
+  if (value <= 2048) {
+    cell.classList.add(`tile-${value}`);
+  } else {
+    cell.classList.add("super");
+
+    const levelMap = {
+      4096: "level-1",
+      8192: "level-2",
+      16384: "level-3",
+      32768: "level-4",
+      65536: "level-5",
+      131072: "level-6"
+    };
+
+    if (levelMap[value]) {
+      cell.classList.add(levelMap[value]);
+    }
+  }
+}
+
 
           if (
             newTilePosition &&
