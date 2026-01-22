@@ -47,7 +47,11 @@ body {
 .cell.tile-512  { background-color: #20B2AA; color: #fff; font-size: 24px; }
 
 .cell.tile-1024 { background-color: #87CEFA; color: #fff; font-size: 20px; }
-.cell.tile-2048 { background-color: #1E90FF; color: #fff; font-size: 20px; }
+
+.cell.tile-2048 {
+  background-color: #1E90FF;
+}
+
 
 /* ---------- 2048以降 共通 ---------- */
 .tile.super {
