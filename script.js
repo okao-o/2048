@@ -87,62 +87,61 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ---------- 描画 ---------- */
-  function updateBoard() {
-    let index = 0;
+function updateBoard() {
+  let index = 0;
 
-    for (let i = 0; i < boardSize; i++) {
-      for (let j = 0; j < boardSize; j++) {
-        const cell = cells[index];
-        const value = board[i][j];
+  for (let i = 0; i < boardSize; i++) {
+    for (let j = 0; j < boardSize; j++) {
+      const cell = cells[index];
+      const value = board[i][j];
 
-        cell.className = "cell";
-        cell.textContent = "";
-        
+      cell.className = "cell";
+      cell.textContent = "";
 
-　if (value !== 0) {
-  cell.textContent = value;
+      if (value !== 0) {
+        cell.textContent = value;
 
-  if (value <= 2048) {
-    cell.classList.add(`tile-${value}`);
-  } else {
-    cell.classList.add("super");
+        if (value <= 2048) {
+          cell.classList.add(`tile-${value}`);
+        } else {
+          cell.classList.add("super");
 
-    const levelMap = {
-      4096: "level-1",
-      8192: "level-2",
-      16384: "level-3",
-      32768: "level-4",
-      65536: "level-5",
-      131072: "level-6"
-    };
+          const levelMap = {
+            4096: "level-1",
+            8192: "level-2",
+            16384: "level-3",
+            32768: "level-4",
+            65536: "level-5",
+            131072: "level-6"
+          };
 
-    if (levelMap[value]) {
-      cell.classList.add(levelMap[value]);
+          if (levelMap[value]) {
+            cell.classList.add(levelMap[value]);
+          }
+        }
+      }
+
+      if (
+        newTilePosition &&
+        newTilePosition.i === i &&
+        newTilePosition.j === j
+      ) {
+        cell.classList.add("new");
+      }
+
+      if (mergedPositions.some(p => p.i === i && p.j === j)) {
+        cell.classList.add("merge");
+      }
+
+      index++;
     }
   }
+
+  mergedPositions = [];
+  newTilePosition = null;
 }
 
 
-          if (
-            newTilePosition &&
-            newTilePosition.i === i &&
-            newTilePosition.j === j
-          ) {
-            cell.classList.add("new");
-          }
-
-          if (mergedPositions.some(p => p.i === i && p.j === j)) {
-            cell.classList.add("merge");
-          }
-        } 
-
-        index++;
-      }
-    }
-
-    mergedPositions = [];
-    newTilePosition = null;
-  }
 
   function updateScore() {
     document.getElementById("score").textContent = "Score: " + score;
