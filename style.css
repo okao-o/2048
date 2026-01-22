@@ -54,21 +54,21 @@ body {
 
 
 /* ---------- 2048以降 共通 ---------- */
-.tile.super {
+.cell.super {
   background: radial-gradient(circle at center, #222 0%, #000 70%);
   color: white;
   font-weight: bold;
 }
 
 /* 4096 */
-.tile.super-1 {
+.cell.level-1 {
   text-shadow:
     0 0 6px #7dd3fc,
     0 0 12px #38bdf8;
 }
 
 /* 8192 */
-.tile.super-2 {
+.cell.level-2 {
   text-shadow:
     0 0 6px #67e8f9,
     0 0 14px #22d3ee,
@@ -76,7 +76,7 @@ body {
 }
 
 /* 16384 */
-.tile.super-3 {
+.cell.level-3 {
   text-shadow:
     0 0 8px #a7f3d0,
     0 0 18px #34d399,
@@ -84,7 +84,7 @@ body {
 }
 
 /* 32768 */
-.tile.super-4 {
+.cell.level-4 {
   text-shadow:
     0 0 10px #fde68a,
     0 0 22px #fbbf24,
@@ -92,15 +92,15 @@ body {
 }
 
 /* 65536 */
-.tile.super-5 {
+.cell.level-5 {
   text-shadow:
     0 0 12px #fdba74,
     0 0 26px #fb923c,
     0 0 48px #f97316;
 }
 
-/* 131072（最上位） */
-.tile.super-6 {
+/* 131072 */
+.cell.level-6 {
   text-shadow:
     0 0 14px #fda4af,
     0 0 32px #fb7185,
