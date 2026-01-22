@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const value = board[i][j];
 
         cell.className = "cell";
-
+        cell.textContent = "";
         
 
 　if (value !== 0) {
@@ -134,9 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
           if (mergedPositions.some(p => p.i === i && p.j === j)) {
             cell.classList.add("merge");
           }
-        } else {
-          cell.textContent = "";
-        }
+        } 
 
         index++;
       }
