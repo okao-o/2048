@@ -324,10 +324,6 @@ function submitScoreIfUpdated() {
     document.getElementById("clear-overlay").classList.add("hidden");
   });
 
-  startGame();
-});
-
-
 /* ---------- 開発用：テストタイル生成 ---------- */
 window.addEventListener("keydown", (e) => {
   // Shift + 数字キーで生成
@@ -347,3 +343,9 @@ window.addEventListener("keydown", (e) => {
     updateBoard();
   }
 });
+
+
+  
+  startGame();
+});
+
