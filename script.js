@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const value = board[i][j];
 
         cell.className = "cell";
-        cell.textContent = "";
+
         
 
 　if (value !== 0) {
