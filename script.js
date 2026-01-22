@@ -324,28 +324,7 @@ function submitScoreIfUpdated() {
     document.getElementById("clear-overlay").classList.add("hidden");
   });
 
-/* ---------- 開発用：テストタイル生成 ---------- */
-window.addEventListener("keydown", (e) => {
-  // Shift + 数字キーで生成
-  if (!e.shiftKey) return;
 
-  const testMap = {
-    "1": 4096,
-    "2": 8192,
-    "3": 16384,
-    "4": 32768,
-    "5": 65536,
-    "6": 131072
-  };
-
-  if (testMap[e.key]) {
-    board[0][0] = testMap[e.key];
-    updateBoard();
-  }
-});
-
-
-  
   startGame();
 });
 
