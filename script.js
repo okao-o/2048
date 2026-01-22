@@ -96,10 +96,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const value = board[i][j];
 
         cell.className = "cell";
+　　　　　cell.textContent = "";
+        
 
-        if (value !== 0) {
-          cell.textContent = value;
-if (value !== 0) {
+　if (value !== 0) {
   cell.textContent = value;
 
   if (value <= 2048) {
