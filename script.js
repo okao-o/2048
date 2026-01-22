@@ -129,9 +129,13 @@ function updateBoard() {
         cell.classList.add("new");
       }
 
-      if (mergedPositions.some(p => p.i === i && p.j === j)) {
-        cell.classList.add("merge");
-      }
+     if (
+  value !== 0 &&
+  mergedPositions.some(p => p.i === i && p.j === j)
+) {
+  cell.classList.add("merge");
+}
+
 
       index++;
     }
