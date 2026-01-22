@@ -72,8 +72,8 @@
 /* スマホ用：少し大きく */
 @media (max-width: 600px) {
   #info-btn {
-    width: 37px;
-    height: 37px;
+    width: 44px;
+    height: 44px;
     font-size: 0.8rem;
   }
 }
