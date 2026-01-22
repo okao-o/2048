@@ -48,9 +48,7 @@ body {
 
 .cell.tile-1024 { background-color: #87CEFA; color: #fff; font-size: 20px; }
 
-.cell.tile-2048 {
-  background-color: #1E90FF;
-}
+.cell.tile-2048 {background-color: #1E90FF; color: #fff; font-size: 20px;}
 
 
 /* ---------- 2048以降 共通 ---------- */
