@@ -49,6 +49,64 @@ body {
 .cell.tile-1024 { background-color: #87CEFA; color: #fff; font-size: 20px; }
 .cell.tile-2048 { background-color: #1E90FF; color: #fff; font-size: 20px; }
 
+/* ---------- 2048以降 共通 ---------- */
+.cell.super {
+  background-color: #1a1a1a;
+  color: #fff;
+  font-weight: bold;
+  text-shadow: 0 0 6px rgba(255,255,255,0.4);
+}
+
+/* 4096 */
+.cell.level-1 {
+  color: #cce6ff;
+  text-shadow:
+    0 0 6px rgba(204,230,255,0.6),
+    0 0 12px rgba(204,230,255,0.4);
+}
+
+/* 8192 */
+.cell.level-2 {
+  color: #d8bfff;
+  text-shadow:
+    0 0 8px rgba(216,191,255,0.7),
+    0 0 16px rgba(216,191,255,0.5);
+}
+
+/* 16384 */
+.cell.level-3 {
+  color: #e6c6ff;
+  text-shadow:
+    0 0 10px rgba(230,198,255,0.8),
+    0 0 20px rgba(230,198,255,0.6);
+}
+
+/* 32768 */
+.cell.level-4 {
+  color: #f2d9ff;
+  text-shadow:
+    0 0 12px rgba(242,217,255,0.9),
+    0 0 28px rgba(242,217,255,0.7);
+}
+
+/* 65536 */
+.cell.level-5 {
+  color: #ffffff;
+  text-shadow:
+    0 0 16px rgba(255,255,255,1),
+    0 0 36px rgba(255,255,255,0.8);
+}
+
+/* 131072（最終） */
+.cell.level-6 {
+  color: #ffffff;
+  text-shadow:
+    0 0 20px rgba(255,255,255,1),
+    0 0 48px rgba(255,255,255,1);
+}
+
+
+
 /* クリア演出 */
 #clear-overlay {
   position: fixed;
