@@ -50,60 +50,60 @@ body {
 .cell.tile-2048 { background-color: #1E90FF; color: #fff; font-size: 20px; }
 
 /* ---------- 2048以降 共通 ---------- */
-.cell.super {
-  background-color: #1a1a1a;
-  color: #fff;
+.tile.super {
+  background: radial-gradient(circle at center, #222 0%, #000 70%);
+  color: white;
   font-weight: bold;
-  text-shadow: 0 0 6px rgba(255,255,255,0.4);
 }
 
 /* 4096 */
-.cell.level-1 {
-  color: #cce6ff;
+.tile.super-1 {
   text-shadow:
-    0 0 6px rgba(204,230,255,0.6),
-    0 0 12px rgba(204,230,255,0.4);
+    0 0 6px #7dd3fc,
+    0 0 12px #38bdf8;
 }
 
 /* 8192 */
-.cell.level-2 {
-  color: #d8bfff;
+.tile.super-2 {
   text-shadow:
-    0 0 8px rgba(216,191,255,0.7),
-    0 0 16px rgba(216,191,255,0.5);
+    0 0 6px #67e8f9,
+    0 0 14px #22d3ee,
+    0 0 24px #06b6d4;
 }
 
 /* 16384 */
-.cell.level-3 {
-  color: #e6c6ff;
+.tile.super-3 {
   text-shadow:
-    0 0 10px rgba(230,198,255,0.8),
-    0 0 20px rgba(230,198,255,0.6);
+    0 0 8px #a7f3d0,
+    0 0 18px #34d399,
+    0 0 32px #10b981;
 }
 
 /* 32768 */
-.cell.level-4 {
-  color: #f2d9ff;
+.tile.super-4 {
   text-shadow:
-    0 0 12px rgba(242,217,255,0.9),
-    0 0 28px rgba(242,217,255,0.7);
+    0 0 10px #fde68a,
+    0 0 22px #fbbf24,
+    0 0 40px #f59e0b;
 }
 
 /* 65536 */
-.cell.level-5 {
-  color: #ffffff;
+.tile.super-5 {
   text-shadow:
-    0 0 16px rgba(255,255,255,1),
-    0 0 36px rgba(255,255,255,0.8);
+    0 0 12px #fdba74,
+    0 0 26px #fb923c,
+    0 0 48px #f97316;
 }
 
-/* 131072（最終） */
-.cell.level-6 {
-  color: #ffffff;
+/* 131072（最上位） */
+.tile.super-6 {
   text-shadow:
-    0 0 20px rgba(255,255,255,1),
-    0 0 48px rgba(255,255,255,1);
+    0 0 14px #fda4af,
+    0 0 32px #fb7185,
+    0 0 64px #e11d48,
+    0 0 96px #be123c;
 }
+
 
 
 
