@@ -92,7 +92,7 @@
   display: grid;
   grid-template-columns: 72px 1fr 72px;
   align-items: center;
-  gap: 12px;
+  
 
   padding: 14px 14px;
   margin-bottom: 8px;
