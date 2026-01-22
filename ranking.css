@@ -44,8 +44,8 @@
 
 /* インフォメーションボタン */
 #info-btn {
-  width: 36px;
-  height: 36px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
 
   border: 2px solid #555;
@@ -53,7 +53,7 @@
   color: #555;
 
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   line-height: 1;
 
   display: flex;
@@ -72,9 +72,9 @@
 /* スマホ用：少し大きく */
 @media (max-width: 600px) {
   #info-btn {
-    width: 44px;
-    height: 44px;
-    font-size: 0.8rem;
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
   }
 }
 
