@@ -61,6 +61,8 @@
   justify-content: center;
 
   cursor: pointer;
+   
+  padding: 0;
 }
 
 /* ホバー時（PC） */
